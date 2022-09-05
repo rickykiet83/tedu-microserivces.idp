@@ -1,5 +1,5 @@
-﻿using TeduMicroservices.IDP;
-using Serilog;
+﻿using Serilog;
+using TeduMicroservices.IDP.Extensions;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()

@@ -1,7 +1,7 @@
 using Serilog;
 using TeduMicroservices.IDP.Extensions;
 
-namespace TeduMicroservices.IDP;
+namespace TeduMicroservices.IDP.Extensions;
 
 internal static class HostingExtensions
 {
@@ -49,10 +49,9 @@ internal static class HostingExtensions
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapDefaultControllerRoute();
+            endpoints.MapDefaultControllerRoute().RequireAuthorization();
             endpoints.MapRazorPages().RequireAuthorization();
         });
-        
 
         return app;
     }
