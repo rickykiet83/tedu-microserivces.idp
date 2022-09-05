@@ -1,4 +1,5 @@
 using Serilog;
+using TeduMicroservices.IDP.Extensions;
 
 namespace TeduMicroservices.IDP;
 
@@ -20,6 +21,9 @@ internal static class HostingExtensions
             .AddInMemoryApiResources(Config.ApiResources)
             .AddTestUsers(TestUsers.Users)
             ;
+        
+        // Add services to the container
+        builder.Services.ConfigureCookiePolicy();
 
         return builder.Build();
     }
@@ -36,7 +40,9 @@ internal static class HostingExtensions
         // uncomment if you want to add a UI
         app.UseStaticFiles();
         app.UseRouting();
-
+        //set cookie policy before authentication/authorization setup
+        app.UseCookiePolicy();
+        
         app.UseIdentityServer();
 
         // uncomment if you want to add a UI
