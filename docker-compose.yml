@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  #  database section
+  teduidentitydb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: teduidentitydb
+    environment:
+      SA_PASSWORD: "Passw0rd!"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - tedu_identity_sqlserver_data:/var/opt/mssql
+    restart: always
+    ports:
+      - "1436:1433"
+
+volumes:
+  tedu_identity_sqlserver_data:
+    external: false
+      
