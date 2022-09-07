@@ -11,20 +11,27 @@ public static class Config
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
             new IdentityResources.Email(),
+            new IdentityResource
+            {
+                Name = "role",
+                UserClaims = new List<string> {"role"},
+            }
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
         {
-            new("api.tedu.microservice", "Tedu Microservices API Scope")
+            new("tedu_microservices_api.read", "Tedu Microservices API Read Scope"),
+            new("tedu_microservices_api.write", "Tedu Microservices API Write Scope"),
         };
 
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
         {
-            new ApiResource("tedumicroservicesapi", "TeduMicroservices API")
+            new ApiResource("tedu_microservices_api", "TeduMicroservices API")
             {
-                Scopes = { "api.tedu.microservice" }
+                Scopes = new List<string> { "tedu_microservices_api.read", "tedu_microservices_api.write" },
+                UserClaims = new List<string> {"role"},
             }
         };
 
@@ -58,7 +65,8 @@ public static class Config
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
-                    "api.tedu.microservice",
+                    "tedu_microservices_api.read",
+                    "tedu_microservices_api.write",
                 }
             },
         };
