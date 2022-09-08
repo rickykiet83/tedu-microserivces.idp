@@ -1,10 +1,9 @@
 ﻿using Serilog;
 using TeduMicroservices.IDP.Extensions;
+using TeduMicroservices.IDP.Persistence;
 
+Log.Information("Starting up");
 var builder = WebApplication.CreateBuilder(args);
-
-Log.Information($"Start {builder.Environment.ApplicationName} up");
-
 try
 {
     builder.Host.AddAppConfigurations();
@@ -14,7 +13,8 @@ try
         .ConfigureServices()
         .ConfigurePipeline();
     
-    app.Run();
+    app.MigrateDatabase()
+        .Run();
 }
 
 catch (Exception ex)

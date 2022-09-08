@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TeduMicroservices.IDP.Migrations.IdentityServer.PersistedGrantDb
 {
-    public partial class InitialPersistedGranMigration : Migration
+    public partial class InitialPersistedGrantMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

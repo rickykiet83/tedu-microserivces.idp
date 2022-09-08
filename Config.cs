@@ -14,7 +14,7 @@ public static class Config
             new IdentityResource
             {
                 Name = "role",
-                UserClaims = new List<string> {"role"},
+                UserClaims = new List<string> { "role" }
             }
         };
 
@@ -28,10 +28,10 @@ public static class Config
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
         {
-            new ApiResource("tedu_microservices_api", "TeduMicroservices API")
+            new ApiResource("tedu_microservices_api", "Tedu Microservices API")
             {
                 Scopes = new List<string> { "tedu_microservices_api.read", "tedu_microservices_api.write" },
-                UserClaims = new List<string> {"role"},
+                UserClaims = new List<string> { "role" }
             }
         };
 
@@ -48,23 +48,52 @@ public static class Config
                 RequireConsent = false,
                 AccessTokenLifetime = 60 * 60 * 2,
 
-                RedirectUris = new List<string>
+                RedirectUris = new List<string>()
                 {
                     "http://localhost:5001/swagger/oauth2-redirect.html",
                 },
-                PostLogoutRedirectUris = new List<string>
+                PostLogoutRedirectUris = new List<string>()
                 {
                     "http://localhost:5001/swagger/oauth2-redirect.html",
                 },
-                AllowedCorsOrigins = new List<string>
+                AllowedCorsOrigins = new List<string>()
                 {
-                    "https://localhost:5001"
+                    "http://localhost:5001"
                 },
                 AllowedScopes =
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
+                    "role",
+                    "tedu_microservices_api.read",
+                    "tedu_microservices_api.write",
+                }
+            },
+            new()
+            {
+                ClientName = "Tedu Microservices Postman Client",
+                ClientId = "tedu_microservices_postman",
+                Enabled = true,
+                ClientUri = null,
+                RequireClientSecret = true,
+                ClientSecrets = new[]
+                {
+                    new Secret("SuperStrongSecret".Sha512())
+                },
+                AllowedGrantTypes = new[]
+                {
+                    GrantType.ClientCredentials
+                },
+                RequireConsent = false,
+                AccessTokenLifetime = 60 * 60 * 2,
+                AllowOfflineAccess = true,
+                AllowedScopes =
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.Email,
+                    "role",
                     "tedu_microservices_api.read",
                     "tedu_microservices_api.write",
                 }

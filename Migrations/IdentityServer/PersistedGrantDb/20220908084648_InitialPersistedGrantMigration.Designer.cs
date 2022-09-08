@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TeduMicroservices.IDP.Migrations.IdentityServer.PersistedGrantDb
 {
     [DbContext(typeof(PersistedGrantDbContext))]
-    [Migration("20220906143455_InitialPersistedGranMigration")]
-    partial class InitialPersistedGranMigration
+    [Migration("20220908084648_InitialPersistedGrantMigration")]
+    partial class InitialPersistedGrantMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
