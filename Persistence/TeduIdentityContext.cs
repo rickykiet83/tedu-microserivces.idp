@@ -12,6 +12,7 @@ public class TeduIdentityContext : IdentityDbContext<User>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.ApplyConfigurationsFromAssembly(typeof(TeduIdentityContext).Assembly);
         builder.ApplyIdentityConfiguration();
     }
 }

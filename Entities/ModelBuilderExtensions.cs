@@ -44,11 +44,7 @@ public static class ModelBuilderExtensions
     {
         entity.ToTable("UserClaims", SystemConstants.IdentitySchema)
             .HasKey(x => x.Id);
-        entity
-            .Property(x => x.Id)
-            .IsRequired()
-            .IsUnicode()
-            .HasColumnType("varchar(50)");
+        
         entity
             .Property(x => x.UserId)
             .IsRequired()

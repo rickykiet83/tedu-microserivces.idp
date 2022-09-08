@@ -13,6 +13,8 @@ try
         .ConfigureServices()
         .ConfigurePipeline();
     
+    SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
+
     app.MigrateDatabase()
         .Run();
 }
