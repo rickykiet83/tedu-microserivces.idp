@@ -8,7 +8,9 @@
   
   <ItemGroup>
     <PackageReference Include="Duende.IdentityServer" Version="6.1.5" />
+    <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.1.5" />
     <PackageReference Include="Duende.IdentityServer.EntityFramework" Version="6.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8">
       <PrivateAssets>all</PrivateAssets>
