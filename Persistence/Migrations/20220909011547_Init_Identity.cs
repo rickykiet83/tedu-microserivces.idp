@@ -134,13 +134,13 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                 schema: "Identity",
                 table: "Roles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "3c4a1b84-099a-41c5-ad39-54ad8a26b23a", "c6702669-4894-41ee-bf91-d91f11272bb2", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "700d5062-2c73-41fc-b25a-572e886faa40", "e2c42739-264f-4792-830c-9da46a98ff6e", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 schema: "Identity",
                 table: "Roles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "754be736-eaa8-4f79-9399-2646f6ce051d", "a3a81184-1b4e-44d0-b0c5-8d26992b0455", "Customer", "CUSTOMER" });
+                values: new object[] { "9d9e2348-0760-4dec-9189-c7a49b3c20e3", "b6818f46-ee2e-46f6-a262-3cc4b318dfc0", "Administrator", "ADMINISTRATOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",

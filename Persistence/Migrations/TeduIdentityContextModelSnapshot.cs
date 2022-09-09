@@ -25,7 +25,6 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .IsUnicode(true)
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -47,15 +46,15 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3c4a1b84-099a-41c5-ad39-54ad8a26b23a",
-                            ConcurrencyStamp = "c6702669-4894-41ee-bf91-d91f11272bb2",
+                            Id = "9d9e2348-0760-4dec-9189-c7a49b3c20e3",
+                            ConcurrencyStamp = "b6818f46-ee2e-46f6-a262-3cc4b318dfc0",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "754be736-eaa8-4f79-9399-2646f6ce051d",
-                            ConcurrencyStamp = "a3a81184-1b4e-44d0-b0c5-8d26992b0455",
+                            Id = "700d5062-2c73-41fc-b25a-572e886faa40",
+                            ConcurrencyStamp = "e2c42739-264f-4792-830c-9da46a98ff6e",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -65,7 +64,6 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .IsUnicode(true)
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("ClaimType")
@@ -98,7 +96,6 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .IsUnicode(true)
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
@@ -109,7 +106,6 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .IsUnicode(true)
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("LoginProvider")
@@ -129,11 +125,9 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .IsUnicode(true)
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("RoleId")
-                        .IsUnicode(true)
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("UserId", "RoleId");
@@ -144,7 +138,6 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .IsUnicode(true)
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("LoginProvider")
@@ -164,7 +157,6 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
             modelBuilder.Entity("TeduMicroservices.IDP.Entities.User", b =>
                 {
                     b.Property<string>("Id")
-                        .IsUnicode(true)
                         .HasColumnType("varchar(50)");
 
                     b.Property<int>("AccessFailedCount")

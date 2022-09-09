@@ -2,6 +2,7 @@ using System.Security.Claims;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TeduMicroservices.IDP.Common;
 using TeduMicroservices.IDP.Entities;
 
 namespace TeduMicroservices.IDP.Persistence;
@@ -12,17 +13,18 @@ public class SeedUserData
     {
         var services = new ServiceCollection();
         services.AddLogging();
-        services.AddDbContext<TeduIdentityContext>(options =>
-            options.UseSqlServer(connectionString));
+        services.AddDbContext<TeduIdentityContext>(opt =>
+            opt.UseSqlServer(connectionString));
 
-        services.AddIdentity<User, IdentityRole>(o =>
+        services.AddIdentity<User, IdentityRole>(opt =>
             {
-                o.Password.RequireDigit = false;
-                o.Password.RequiredLength = 6;
-                o.Password.RequireUppercase = false;
-                o.Password.RequireLowercase = false;
-                o.Password.RequireNonAlphanumeric = false;
-            }).AddEntityFrameworkStores<TeduIdentityContext>()
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 6;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+            })
+            .AddEntityFrameworkStores<TeduIdentityContext>()
             .AddDefaultTokenProviders();
 
         using (var serviceProvider = services.BuildServiceProvider())
@@ -30,38 +32,45 @@ public class SeedUserData
             using (var scope = serviceProvider
                        .GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                CreateUser(scope, "Alice", "Smith", "Alice Smith's Wollongong",
+                CreateUser(scope, "Alice", "Smith", "Alice Smith's Wollongong", 
                     Guid.NewGuid().ToString(), "alice123",
-                    "Administrator", "AliceSmith@email.com");
+                    "Administrator", "alicesmith@example.com");
             }
         }
     }
 
-    private static void CreateUser(IServiceScope scope, string name, string lastName,
+    private static void CreateUser(IServiceScope scope, string firstName, string lastName,
         string address, string id, string password, string role, string email)
     {
-        var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-        var user = userMgr.FindByNameAsync(email).Result;
+        var userManagement = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+        var user = userManagement.FindByNameAsync(email).Result;
         if (user == null)
         {
             user = new User
             {
-                UserName = email, Email = email, FirstName = name,
-                LastName = lastName, Address = address,
-                Id = id
+                UserName = email,
+                Email = email,
+                FirstName = firstName,
+                LastName = lastName,
+                Address = address,
+                EmailConfirmed = true,
+                Id = id,
             };
-            var result = userMgr.CreateAsync(user, password).Result;
+            var result = userManagement.CreateAsync(user, password).Result;
             CheckResult(result);
 
-            result = userMgr.AddToRoleAsync(user, role).Result;
-            CheckResult(result);
-
-            result = userMgr.AddClaimsAsync(user, new Claim[]
+            var addToRoleResult = userManagement.AddToRoleAsync(user, role).Result;
+            CheckResult(addToRoleResult);
+            
+            result = userManagement.AddClaimsAsync(user, new Claim[]
             {
                 new(JwtClaimTypes.GivenName, user.FirstName),
                 new(JwtClaimTypes.FamilyName, user.LastName),
-                new(JwtClaimTypes.Role, role),
-                new(JwtClaimTypes.Address, user.Address)
+                new(SystemConstants.Claims.Roles, role),
+                new(SystemConstants.Claims.UserName, user.UserName),
+                new(JwtClaimTypes.Address, user.Address),
+                new(JwtClaimTypes.Email, user.Email),
+                new(ClaimTypes.NameIdentifier, user.Id),
             }).Result;
             CheckResult(result);
         }

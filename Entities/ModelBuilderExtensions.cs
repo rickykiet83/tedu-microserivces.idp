@@ -22,10 +22,10 @@ public static class ModelBuilderExtensions
     {
         entity.ToTable("UserTokens", SystemConstants.IdentitySchema)
             .HasKey(x => new { x.UserId });
+        
         entity
             .Property(x => x.UserId)
             .IsRequired()
-            .IsUnicode()
             .HasColumnType("varchar(50)");
     }
 
@@ -33,10 +33,10 @@ public static class ModelBuilderExtensions
     {
         entity.ToTable("UserLogins", SystemConstants.IdentitySchema)
             .HasKey(x => x.UserId);
+        
         entity
             .Property(x => x.UserId)
             .IsRequired()
-            .IsUnicode()
             .HasColumnType("varchar(50)");
     }
 
@@ -48,7 +48,6 @@ public static class ModelBuilderExtensions
         entity
             .Property(x => x.UserId)
             .IsRequired()
-            .IsUnicode()
             .HasColumnType("varchar(50)");
     }
 
@@ -60,14 +59,11 @@ public static class ModelBuilderExtensions
         entity
             .Property(x => x.UserId)
             .IsRequired()
-            .IsUnicode()
             .HasColumnType("varchar(50)");
         entity
             .Property(x => x.RoleId)
             .IsRequired()
-            .IsUnicode()
             .HasColumnType("varchar(50)");
-
     }
 
     private static void ConfigureRole(EntityTypeBuilder<IdentityRole> entity)
@@ -78,7 +74,6 @@ public static class ModelBuilderExtensions
         entity
             .Property(x => x.Id)
             .IsRequired()
-            .IsUnicode()
             .HasColumnType("varchar(50)");
 
         entity
@@ -97,7 +92,6 @@ public static class ModelBuilderExtensions
         entity
             .Property(x => x.Id)
             .IsRequired()
-            .IsUnicode()
             .HasColumnType("varchar(50)");
 
         entity.HasIndex(x => x.Email);
@@ -149,7 +143,6 @@ public static class ModelBuilderExtensions
         entity
             .Property(x => x.Id)
             .IsRequired()
-            .IsUnicode()
             .HasColumnType("varchar(50)");
     }
 }

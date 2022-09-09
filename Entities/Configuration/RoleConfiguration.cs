@@ -16,9 +16,10 @@ public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
             },
             new IdentityRole
             {
-                Name = "Customer", 
+                Name = "Customer",
                 NormalizedName = "CUSTOMER",
                 Id = Guid.NewGuid().ToString()
-            });
+            }
+        );
     }
 }

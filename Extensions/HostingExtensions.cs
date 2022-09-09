@@ -59,6 +59,10 @@ internal static class HostingExtensions
         builder.Services.ConfigureCors();
         builder.Services.ConfigureIdentity(builder.Configuration);
         builder.Services.ConfigureIdentityServer(builder.Configuration);
+        
+        // builder.Services.ConfigureAuthentication();
+        // builder.Services.ConfigureAuthorization();
+
         return builder.Build();
     }
     
