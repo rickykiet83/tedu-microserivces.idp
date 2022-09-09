@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TeduMicroservices.IDP.Common;
 using TeduMicroservices.IDP.Entities;
 using TeduMicroservices.IDP.Persistence;
 
@@ -7,6 +8,15 @@ namespace TeduMicroservices.IDP.Extensions;
 
 public static class ServiceExtensions
 {
+    internal static IServiceCollection AddConfigurationSettings(this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        var emailSettings = configuration.GetSection(nameof(SMTPEmailSetting))
+            .Get<SMTPEmailSetting>();
+        services.AddSingleton(emailSettings);
+        
+        return services;
+    }
     public static void ConfigureCors(this IServiceCollection services)
     {
         services.AddCors(options =>
