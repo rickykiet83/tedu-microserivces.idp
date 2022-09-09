@@ -18,7 +18,6 @@ public class Index : PageModel
     private readonly IIdentityServerInteractionService _interaction;
     private readonly IEventService _events;
     private readonly SignInManager<User> _signInManager;
-
     [BindProperty] 
     public string LogoutId { get; set; }
 
@@ -71,7 +70,6 @@ public class Index : PageModel
             LogoutId ??= await _interaction.CreateLogoutContextAsync();
                 
             // delete local authentication cookie
-            // await HttpContext.SignOutAsync();
             await _signInManager.SignOutAsync();
 
             // raise the logout event

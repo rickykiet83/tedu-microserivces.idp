@@ -11,7 +11,7 @@ public static class Config
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
             new IdentityResources.Email(),
-            new()
+            new IdentityResource
             {
                 Name = "role",
                 UserClaims = new List<string> { "role" }
@@ -28,16 +28,9 @@ public static class Config
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
         {
-            new("tedu_microservices_api", "Tedu Microservices API")
+            new ApiResource("tedu_microservices_api", "Tedu Microservices API")
             {
-                Scopes = new List<string>
-                {
-                    "tedu_microservices_api.read",
-                    "tedu_microservices_api.write",
-                    IdentityServerConstants.StandardScopes.OpenId,
-                    IdentityServerConstants.StandardScopes.Profile,
-                    IdentityServerConstants.StandardScopes.Email,
-                },
+                Scopes = new List<string> { "tedu_microservices_api.read", "tedu_microservices_api.write" },
                 UserClaims = new List<string> { "role" }
             }
         };
@@ -90,8 +83,8 @@ public static class Config
                 },
                 AllowedGrantTypes = new[]
                 {
-                    GrantType.ResourceOwnerPassword,
                     GrantType.ClientCredentials,
+                    GrantType.ResourceOwnerPassword
                 },
                 RequireConsent = false,
                 AccessTokenLifetime = 60 * 60 * 2,

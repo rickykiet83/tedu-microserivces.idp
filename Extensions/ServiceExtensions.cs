@@ -74,23 +74,4 @@ public static class ServiceExtensions
             .AddEntityFrameworkStores<TeduIdentityContext>()
             .AddDefaultTokenProviders();
     }
-    
-    public static void ConfigureAuthentication(this IServiceCollection services)
-    {
-        services.AddAuthentication()
-            .AddLocalApi("Bearer", option => { option.ExpectedScope = "api.octoqual"; });
-    }
-    
-    public static void ConfigureAuthorization(this IServiceCollection services)
-    {
-        services.AddAuthorization(
-            options =>
-            {
-                options.AddPolicy("Bearer", policy =>
-                {
-                    policy.AddAuthenticationSchemes("Bearer");
-                    policy.RequireAuthenticatedUser();
-                });
-            });
-    }
 }

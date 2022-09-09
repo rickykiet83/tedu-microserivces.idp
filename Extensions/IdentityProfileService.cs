@@ -2,7 +2,6 @@ using System.Security.Claims;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
-using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using TeduMicroservices.IDP.Common;
 using TeduMicroservices.IDP.Entities;
@@ -26,9 +25,9 @@ public class IdentityProfileService : IProfileService
         var user = await _userManager.FindByIdAsync(sub);
         if (user == null)
         {
-            throw new ArgumentException("");
+            throw new ArgumentNullException("User Id not found!");
         }
-        
+
         var principal = await _claimsFactory.CreateAsync(user);
         var claims = principal.Claims.ToList();
         var roles = await _userManager.GetRolesAsync(user);

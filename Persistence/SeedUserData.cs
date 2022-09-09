@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Duende.IdentityServer;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -61,13 +62,13 @@ public class SeedUserData
 
             var addToRoleResult = userManagement.AddToRoleAsync(user, role).Result;
             CheckResult(addToRoleResult);
-            
+
             result = userManagement.AddClaimsAsync(user, new Claim[]
             {
-                new(JwtClaimTypes.GivenName, user.FirstName),
-                new(JwtClaimTypes.FamilyName, user.LastName),
-                new(SystemConstants.Claims.Roles, role),
                 new(SystemConstants.Claims.UserName, user.UserName),
+                new(SystemConstants.Claims.FirstName, user.FirstName),
+                new(SystemConstants.Claims.LastName, user.LastName),
+                new(SystemConstants.Claims.Roles, role),
                 new(JwtClaimTypes.Address, user.Address),
                 new(JwtClaimTypes.Email, user.Email),
                 new(ClaimTypes.NameIdentifier, user.Id),
