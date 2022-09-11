@@ -9,6 +9,8 @@ public class TeduIdentityContext : IdentityDbContext<User>
     public TeduIdentityContext(DbContextOptions<TeduIdentityContext> options) : base(options)
     {
     }
+    
+    public DbSet<Permission> Permissions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

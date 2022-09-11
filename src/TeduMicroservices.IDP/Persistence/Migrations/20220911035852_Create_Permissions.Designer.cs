@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeduMicroservices.IDP.Persistence;
 
@@ -11,9 +12,10 @@ using TeduMicroservices.IDP.Persistence;
 namespace TeduMicroservices.IDP.Persistence.Migrations
 {
     [DbContext(typeof(TeduIdentityContext))]
-    partial class TeduIdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20220911035852_Create_Permissions")]
+    partial class Create_Permissions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
