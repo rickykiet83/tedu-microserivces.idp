@@ -84,7 +84,7 @@ public static class ServiceExtensions
             .AddEntityFrameworkStores<TeduIdentityContext>()
             .AddDefaultTokenProviders();
     }
-    
+
     public static void ConfigureSwagger(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddEndpointsApiExplorer();
@@ -95,13 +95,12 @@ public static class ServiceExtensions
             {
                 Title = "Tedu Identity Server API",
                 Version = "v1",
-                Description = "",
                 Contact = new OpenApiContact
                 {
                     Name = "Tedu Identity Service",
                     Email = "kietpham.dev@gmail.com",
                     Url = new Uri("https://kietpham.dev")
-                },
+                }
             });
         });
     }

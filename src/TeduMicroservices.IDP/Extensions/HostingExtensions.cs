@@ -65,8 +65,10 @@ internal static class HostingExtensions
         builder.Services.ConfigureCors();
         builder.Services.ConfigureIdentity(builder.Configuration);
         builder.Services.ConfigureIdentityServer(builder.Configuration);
-        builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
-        builder.Services.AddTransient(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
+        builder.Services.AddTransient(typeof(IUnitOfWork), 
+            typeof(UnitOfWork));
+        builder.Services.AddTransient(typeof(IRepositoryBase<,>), 
+            typeof(RepositoryBase<,>));
         builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
         builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
         builder.Services.AddControllers(config =>

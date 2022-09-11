@@ -12,19 +12,20 @@ public class RepositoryManager : IRepositoryManager
     private readonly TeduIdentityContext _dbContext;
     private readonly Lazy<IPermissionRepository> _permissionRepository;
 
-    public RepositoryManager(TeduIdentityContext dbContext, IUnitOfWork unitOfWork, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+    public RepositoryManager(TeduIdentityContext dbContext, IUnitOfWork unitOfWork, UserManager<User> userManager,
+        RoleManager<IdentityRole> roleManager)
     {
         _dbContext = dbContext;
         _unitOfWork = unitOfWork;
         UserManager = userManager;
         RoleManager = roleManager;
-        _permissionRepository = new Lazy<IPermissionRepository>(() => 
+        
+        _permissionRepository = new Lazy<IPermissionRepository>(() =>
             new PermissionRepository(_dbContext, _unitOfWork));
     }
-    
+
     public UserManager<User> UserManager { get; }
     public RoleManager<IdentityRole> RoleManager { get; }
-    
     public IPermissionRepository Permission => _permissionRepository.Value;
 
     public Task<int> SaveAsync()
