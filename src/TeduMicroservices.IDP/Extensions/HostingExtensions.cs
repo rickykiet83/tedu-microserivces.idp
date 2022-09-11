@@ -2,6 +2,7 @@ using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using TeduMicroservices.IDP.Common.Domains;
 using TeduMicroservices.IDP.Common.Repositories;
+using TeduMicroservices.IDP.Presentation;
 using TeduMicroservices.IDP.Services.EmailService;
 
 namespace TeduMicroservices.IDP.Extensions;
@@ -68,6 +69,13 @@ internal static class HostingExtensions
         builder.Services.AddTransient(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
         builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
         builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
+        builder.Services.AddControllers(config =>
+        {
+            config.RespectBrowserAcceptHeader = true;
+            config.ReturnHttpNotAcceptable = true;
+        }).AddApplicationPart(typeof(AssemblyReference).Assembly);
+
+        builder.Services.ConfigureSwagger(builder.Configuration);
         return builder.Build();
     }
     
@@ -83,6 +91,8 @@ internal static class HostingExtensions
         // uncomment if you want to add a UI
         app.UseStaticFiles();
         app.UseCors("CorsPolicy");
+        app.UseSwagger();
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tedu Identity API"));
         app.UseRouting();
         //set cookie policy before authentication/authorization setup
         app.UseCookiePolicy();
