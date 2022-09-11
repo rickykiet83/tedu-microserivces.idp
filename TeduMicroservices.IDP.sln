@@ -7,6 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2EFCB6A3-C37
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeduMicroservices.IDP", "src\TeduMicroservices.IDP\TeduMicroservices.IDP.csproj", "{0ED4128E-E440-4794-9B45-FD8406FC9347}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5C59DF9A-92A3-498F-9C2A-31D0332CF4C7}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		src\docker-compose.yml = src\docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
