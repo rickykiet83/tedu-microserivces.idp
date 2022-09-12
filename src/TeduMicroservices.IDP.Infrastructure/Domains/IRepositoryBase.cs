@@ -34,13 +34,13 @@ public interface IRepositoryBase<T, K>
     #region Dapper
 
     Task<IReadOnlyList<TModel>> QueryAsync<TModel>(string sql, object? param, 
-        CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : class;
+        CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : EntityBase<K>;
 
     Task<TModel> QueryFirstOrDefaultAsync<TModel>(string sql, object? param, 
-        CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : class;
+        CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : EntityBase<K>;
 
     Task<TModel> QuerySingleAsync<TModel>(string sql, object? param, 
-        CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : class;
+        CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : EntityBase<K>;
 
     Task<int> ExecuteAsync(string sql, object? param, 
         CommandType? commandType, IDbTransaction? transaction, int? commandTimeout);
