@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace TeduMicroservices.IDP.Entities.Configuration;
+namespace TeduMicroservices.IDP.Infrastructure.Entities.Configuration;
 
 public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
 {

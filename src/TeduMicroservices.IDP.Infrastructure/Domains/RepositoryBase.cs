@@ -101,7 +101,7 @@ public class RepositoryBase<T, K> : IRepositoryBase<T, K>
 
     public async Task<IReadOnlyList<TModel>> QueryAsync<TModel>(string sql, object? param, 
         CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
-    where TModel: class
+    where TModel: EntityBase<K>
     {
         return (await _dbContext.Connection.QueryAsync<TModel>(sql, param, 
                 transaction, 30, CommandType.StoredProcedure)).AsList();
@@ -109,7 +109,7 @@ public class RepositoryBase<T, K> : IRepositoryBase<T, K>
 
     public async Task<TModel> QueryFirstOrDefaultAsync<TModel>(string sql, object? param, 
         CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
-        where TModel: class
+        where TModel: EntityBase<K>
     {
         var entity = await _dbContext.Connection.QueryFirstOrDefaultAsync<TModel>(sql, param, transaction, null, CommandType.StoredProcedure);
         if (entity == null) throw new EntityNotFoundException();
@@ -118,7 +118,7 @@ public class RepositoryBase<T, K> : IRepositoryBase<T, K>
 
     public async Task<TModel> QuerySingleAsync<TModel>(string sql, object? param, 
         CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
-        where TModel: class
+        where TModel: EntityBase<K>
     {
         return await _dbContext.Connection.QuerySingleAsync<TModel>(sql, param, transaction, null, CommandType.StoredProcedure);
     }
