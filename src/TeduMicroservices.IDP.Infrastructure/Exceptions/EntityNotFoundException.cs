@@ -1,4 +1,4 @@
-namespace TeduMicroservices.IDP.Common.Exceptions;
+namespace TeduMicroservices.IDP.Infrastructure.Exceptions;
 
 public class EntityNotFoundException : ApplicationException
 {

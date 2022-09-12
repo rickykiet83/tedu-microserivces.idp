@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
-using TeduMicroservices.IDP.Common.Domains;
+using TeduMicroservices.IDP.Infrastructure.Domains;
 
-namespace TeduMicroservices.IDP.Entities;
+namespace TeduMicroservices.IDP.Infrastructure.Entities;
 
 public class Permission : EntityBase<long>
 {

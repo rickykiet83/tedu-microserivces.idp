@@ -2,6 +2,7 @@ using System.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TeduMicroservices.IDP.Entities;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 
 namespace TeduMicroservices.IDP.Persistence;
 

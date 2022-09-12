@@ -1,7 +1,7 @@
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
-using TeduMicroservices.IDP.Common.Domains;
-using TeduMicroservices.IDP.Common.Repositories;
+using TeduMicroservices.IDP.Infrastructure.Domains;
+using TeduMicroservices.IDP.Infrastructure.Repositories;
 using TeduMicroservices.IDP.Presentation;
 using TeduMicroservices.IDP.Services.EmailService;
 

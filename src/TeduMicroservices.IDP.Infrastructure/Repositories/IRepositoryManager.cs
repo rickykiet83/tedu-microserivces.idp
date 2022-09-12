@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Storage;
-using TeduMicroservices.IDP.Entities;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 
-namespace TeduMicroservices.IDP.Common.Repositories;
+namespace TeduMicroservices.IDP.Infrastructure.Repositories;
 
 public interface IRepositoryManager
 {
@@ -13,4 +13,5 @@ public interface IRepositoryManager
     Task<IDbContextTransaction> BeginTransactionAsync();
     Task EndTransactionAsync();
     void RollbackTransaction();
+
 }

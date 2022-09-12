@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TeduMicroservices.IDP.Common;
+using TeduMicroservices.IDP.Infrastructure.Common;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 
-namespace TeduMicroservices.IDP.Entities.Configuration;
+namespace TeduMicroservices.IDP.Infrastructure.Configuration;
 
 public class PermissionConfiguration : IEntityTypeConfiguration<Permission>
 {

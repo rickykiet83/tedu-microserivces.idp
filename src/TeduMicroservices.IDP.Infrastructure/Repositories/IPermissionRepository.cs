@@ -1,7 +1,7 @@
-using TeduMicroservices.IDP.Common.Domains;
-using TeduMicroservices.IDP.Entities;
+using TeduMicroservices.IDP.Infrastructure.Domains;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 
-namespace TeduMicroservices.IDP.Common.Repositories;
+namespace TeduMicroservices.IDP.Infrastructure.Repositories;
 
 public interface IPermissionRepository : IRepositoryBase<Permission, long>
 {

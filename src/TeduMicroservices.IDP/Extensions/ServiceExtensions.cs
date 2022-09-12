@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using TeduMicroservices.IDP.Common;
-using TeduMicroservices.IDP.Entities;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 using TeduMicroservices.IDP.Persistence;
 namespace TeduMicroservices.IDP.Extensions;
 

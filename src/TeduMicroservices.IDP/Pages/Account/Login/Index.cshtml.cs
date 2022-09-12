@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TeduMicroservices.IDP.Entities;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 
 namespace TeduMicroservices.IDP.Pages.Login;
 

@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TeduMicroservices.IDP.Common;
+using TeduMicroservices.IDP.Infrastructure.Common;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 
 namespace TeduMicroservices.IDP.Entities;
 

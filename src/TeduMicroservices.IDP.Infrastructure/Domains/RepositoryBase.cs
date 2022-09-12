@@ -3,10 +3,10 @@ using System.Linq.Expressions;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using TeduMicroservices.IDP.Common.Exceptions;
+using TeduMicroservices.IDP.Infrastructure.Exceptions;
 using TeduMicroservices.IDP.Persistence;
 
-namespace TeduMicroservices.IDP.Common.Domains;
+namespace TeduMicroservices.IDP.Infrastructure.Domains;
 
 public class RepositoryBase<T, K> : IRepositoryBase<T, K>
     where T : EntityBase<K>

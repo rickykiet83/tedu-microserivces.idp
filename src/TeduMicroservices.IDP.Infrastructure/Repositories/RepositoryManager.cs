@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Storage;
-using TeduMicroservices.IDP.Common.Domains;
-using TeduMicroservices.IDP.Entities;
+using TeduMicroservices.IDP.Infrastructure.Domains;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 using TeduMicroservices.IDP.Persistence;
 
-namespace TeduMicroservices.IDP.Common.Repositories;
+namespace TeduMicroservices.IDP.Infrastructure.Repositories;
 
 public class RepositoryManager : IRepositoryManager
 {
