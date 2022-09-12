@@ -78,6 +78,7 @@ internal static class HostingExtensions
         }).AddApplicationPart(typeof(AssemblyReference).Assembly);
 
         builder.Services.ConfigureSwagger(builder.Configuration);
+        builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
         return builder.Build();
     }
     

@@ -99,28 +99,32 @@ public class RepositoryBase<T, K> : IRepositoryBase<T, K>
     
     #region Dapper
 
-    public async Task<IReadOnlyList<T>> QueryAsync<T>(string sql, object param = null, IDbTransaction transaction = null,
-        CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<TModel>> QueryAsync<TModel>(string sql, object? param, 
+        CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
+    where TModel: class
     {
-        return (await _dbContext.Connection.QueryAsync<T>(sql, param, transaction))
-            .AsList();
+        return (await _dbContext.Connection.QueryAsync<TModel>(sql, param, 
+                transaction, 30, CommandType.StoredProcedure)).AsList();
     }
 
-    public async Task<T> QueryFirstOrDefaultAsync<T>(string sql, object param = null, IDbTransaction transaction = null,
-        CancellationToken cancellationToken = default)
+    public async Task<TModel> QueryFirstOrDefaultAsync<TModel>(string sql, object? param, 
+        CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
+        where TModel: class
     {
-        var entity = await _dbContext.Connection.QueryFirstOrDefaultAsync<T>(sql, param, transaction);
+        var entity = await _dbContext.Connection.QueryFirstOrDefaultAsync<TModel>(sql, param, transaction, null, CommandType.StoredProcedure);
         if (entity == null) throw new EntityNotFoundException();
         return entity;
     }
 
-    public async Task<T> QuerySingleAsync<T>(string sql, object param = null, IDbTransaction transaction = null,
-        CancellationToken cancellationToken = default)
+    public async Task<TModel> QuerySingleAsync<TModel>(string sql, object? param, 
+        CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
+        where TModel: class
     {
-        return await _dbContext.Connection.QuerySingleAsync<T>(sql, param, transaction);
+        return await _dbContext.Connection.QuerySingleAsync<TModel>(sql, param, transaction, null, CommandType.StoredProcedure);
     }
 
-    public async Task<int> ExecuteAsync(string sql, object param = null, IDbTransaction transaction = null, CommandType? commandType = CommandType.StoredProcedure, int? commandTimeout = null)
+    public async Task<int> ExecuteAsync(string sql, object? param, 
+        CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
     {
         return await _dbContext.Connection.ExecuteAsync(sql, param, transaction, commandTimeout, commandType);
     }

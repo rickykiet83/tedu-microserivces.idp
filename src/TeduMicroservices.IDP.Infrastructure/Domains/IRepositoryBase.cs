@@ -33,18 +33,17 @@ public interface IRepositoryBase<T, K>
     
     #region Dapper
 
-    Task<IReadOnlyList<T>> QueryAsync<T>(string sql, object param = null, 
-        IDbTransaction transaction = null, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<TModel>> QueryAsync<TModel>(string sql, object? param, 
+        CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : class;
 
-    Task<T> QueryFirstOrDefaultAsync<T>(string sql, object param = null, 
-        IDbTransaction transaction = null, CancellationToken cancellationToken = default);
+    Task<TModel> QueryFirstOrDefaultAsync<TModel>(string sql, object? param, 
+        CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : class;
 
-    Task<T> QuerySingleAsync<T>(string sql, object param = null, 
-        IDbTransaction transaction = null, CancellationToken cancellationToken = default);
+    Task<TModel> QuerySingleAsync<TModel>(string sql, object? param, 
+        CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : class;
 
-    Task<int> ExecuteAsync(string sql, object param = null, 
-        IDbTransaction transaction = null, CommandType? commandType = null,
-        int? commandTimeout = null);
+    Task<int> ExecuteAsync(string sql, object? param, 
+        CommandType? commandType, IDbTransaction? transaction, int? commandTimeout);
 
     #endregion Dapper
 
