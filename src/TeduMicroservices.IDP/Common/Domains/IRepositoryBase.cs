@@ -1,3 +1,4 @@
+using System.Data;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -29,6 +30,23 @@ public interface IRepositoryBase<T, K>
     Task DeleteListAsync(IEnumerable<T> entities);
 
     #endregion
+    
+    #region Dapper
+
+    Task<IReadOnlyList<T>> QueryAsync<T>(string sql, object param = null, 
+        IDbTransaction transaction = null, CancellationToken cancellationToken = default);
+
+    Task<T> QueryFirstOrDefaultAsync<T>(string sql, object param = null, 
+        IDbTransaction transaction = null, CancellationToken cancellationToken = default);
+
+    Task<T> QuerySingleAsync<T>(string sql, object param = null, 
+        IDbTransaction transaction = null, CancellationToken cancellationToken = default);
+
+    Task<int> ExecuteAsync(string sql, object param = null, 
+        IDbTransaction transaction = null, CommandType? commandType = null,
+        int? commandTimeout = null);
+
+    #endregion Dapper
 
     Task<int> SaveChangesAsync();
     Task<IDbContextTransaction> BeginTransactionAsync();
