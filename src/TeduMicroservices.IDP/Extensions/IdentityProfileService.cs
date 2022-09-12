@@ -3,8 +3,6 @@ using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
-using TeduMicroservices.IDP.Common;
-using TeduMicroservices.IDP.Entities;
 using TeduMicroservices.IDP.Infrastructure.Common;
 using TeduMicroservices.IDP.Infrastructure.Entities;
 

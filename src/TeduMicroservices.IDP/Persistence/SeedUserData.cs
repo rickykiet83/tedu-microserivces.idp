@@ -1,10 +1,7 @@
 using System.Security.Claims;
-using Duende.IdentityServer;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using TeduMicroservices.IDP.Common;
-using TeduMicroservices.IDP.Entities;
 using TeduMicroservices.IDP.Infrastructure.Common;
 using TeduMicroservices.IDP.Infrastructure.Entities;
 
