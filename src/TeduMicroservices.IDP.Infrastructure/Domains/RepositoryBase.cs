@@ -111,7 +111,7 @@ public class RepositoryBase<T, K> : IRepositoryBase<T, K>
         CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
         where TModel: EntityBase<K>
     {
-        var entity = await _dbContext.Connection.QueryFirstOrDefaultAsync<TModel>(sql, param, transaction, null, CommandType.StoredProcedure);
+        var entity = await _dbContext.Connection.QueryFirstOrDefaultAsync<TModel>(sql, param, transaction, commandTimeout, commandType);
         if (entity == null) throw new EntityNotFoundException();
         return entity;
     }
@@ -120,7 +120,7 @@ public class RepositoryBase<T, K> : IRepositoryBase<T, K>
         CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
         where TModel: EntityBase<K>
     {
-        return await _dbContext.Connection.QuerySingleAsync<TModel>(sql, param, transaction, null, CommandType.StoredProcedure);
+        return await _dbContext.Connection.QuerySingleAsync<TModel>(sql, param, transaction, commandTimeout, commandType);
     }
 
     public async Task<int> ExecuteAsync(string sql, object? param, 
