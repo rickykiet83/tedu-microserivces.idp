@@ -1,11 +1,12 @@
 using TeduMicroservices.IDP.Infrastructure.Domains;
 using TeduMicroservices.IDP.Infrastructure.Entities;
+using TeduMicroservices.IDP.Infrastructure.ViewModels;
 
 namespace TeduMicroservices.IDP.Infrastructure.Repositories;
 
 public interface IPermissionRepository : IRepositoryBase<Permission, long>
 {
-    Task<IEnumerable<Permission>> GetPermissionsByRole(string roleId, bool trackChanges);
+    Task<IReadOnlyList<PermissionViewModel>> GetPermissionsByRole(string roleId);
 
     void UpdatePermissionsByRoleId(string roleId, IEnumerable<Permission> permissionCollection,
         bool trackChanges);

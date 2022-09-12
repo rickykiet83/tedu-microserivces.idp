@@ -1,10 +1,12 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using TeduMicroservices.IDP.Infrastructure.Repositories;
+using TeduMicroservices.IDP.Infrastructure.ViewModels;
 
 namespace TeduMicroservices.IDP.Presentation.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/roles/{roleId}/[controller]")]
 public class PermissionsController : ControllerBase
 {
     private readonly IRepositoryManager _repository;
@@ -12,5 +14,13 @@ public class PermissionsController : ControllerBase
     public PermissionsController(IRepositoryManager repository)
     {
         _repository = repository;
+    }
+    
+    [HttpGet]
+    [ProducesResponseType(typeof(IReadOnlyList<PermissionViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetPermissions(string roleId)
+    {
+        var result = await _repository.Permission.GetPermissionsByRole(roleId);
+        return Ok(result);
     }
 }
