@@ -23,4 +23,12 @@ public class PermissionsController : ControllerBase
         var result = await _repository.Permission.GetPermissionsByRole(roleId);
         return Ok(result);
     }
+    
+    [HttpPost]
+    [ProducesResponseType(typeof(PermissionViewModel), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> CreatePermission(string roleId, [FromBody] PermissionAddModel model)
+    {
+        var result = await _repository.Permission.CreatePermission(roleId, model);
+        return result != null ? Ok(result) : NoContent();
+    }
 }
