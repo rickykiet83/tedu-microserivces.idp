@@ -45,6 +45,16 @@ public class PermissionRepository : RepositoryBase<Permission, long>, IPermissio
         };
     }
 
+    public Task DeletePermission(string roleId, string function, string command)
+    {
+        var parameters = new DynamicParameters();
+        parameters.Add("@roleId", roleId, DbType.String);
+        parameters.Add("@function", function, DbType.String);
+        parameters.Add("@command", command, DbType.String);
+
+        return ExecuteAsync("Delete_Permission", parameters);
+    }
+
     public void UpdatePermissionsByRoleId(string roleId, IEnumerable<Permission> permissionCollection,
         bool trackChanges = false)
     {
