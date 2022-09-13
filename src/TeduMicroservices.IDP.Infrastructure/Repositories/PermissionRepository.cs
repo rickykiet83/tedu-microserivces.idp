@@ -55,9 +55,19 @@ public class PermissionRepository : RepositoryBase<Permission, long>, IPermissio
         return ExecuteAsync("Delete_Permission", parameters);
     }
 
-    public void UpdatePermissionsByRoleId(string roleId, IEnumerable<Permission> permissionCollection,
-        bool trackChanges = false)
+    public Task UpdatePermissionsByRoleId(string roleId, IEnumerable<PermissionAddModel> permissionCollection)
     {
-        throw new NotImplementedException();
+        var dt = new DataTable();
+        dt.Columns.Add("RoleId", typeof(string));
+        dt.Columns.Add("Function", typeof(string));
+        dt.Columns.Add("Command", typeof(string));
+        foreach (var item in permissionCollection)
+        {
+            dt.Rows.Add(roleId, item.Function, item.Command);
+        }
+        var parameters = new DynamicParameters();
+        parameters.Add("@roleId", roleId, DbType.String);
+        parameters.Add("@permissions", dt.AsTableValuedParameter("dbo.Permission"));
+        return ExecuteAsync("Update_Permissions_ByRole", parameters);
     }
 }

@@ -40,4 +40,12 @@ public class PermissionsController : ControllerBase
         await _repository.Permission.DeletePermission(roleId, function, command);
         return NoContent();
     }
+    
+    [HttpPost("update-permissions")]
+    [ProducesResponseType(typeof(NoContentResult), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> UpdatePermissions(string roleId, [FromBody]IEnumerable<PermissionAddModel> permissions)
+    {
+        await _repository.Permission.UpdatePermissionsByRoleId(roleId, permissions);
+        return NoContent(); 
+    }
 }
