@@ -11,10 +11,11 @@ public static class Config
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
             new IdentityResources.Email(),
-            new IdentityResource
+            new()
             {
-                Name = "role",
-                UserClaims = new List<string> { "role" }
+                Name = "roles",
+                DisplayName = "User role(s)",
+                UserClaims = new List<string> { "roles" }
             }
         };
 
@@ -31,7 +32,7 @@ public static class Config
             new ApiResource("tedu_microservices_api", "Tedu Microservices API")
             {
                 Scopes = new List<string> { "tedu_microservices_api.read", "tedu_microservices_api.write" },
-                UserClaims = new List<string> { "role" }
+                UserClaims = new List<string> { "roles" }
             }
         };
 
@@ -65,7 +66,7 @@ public static class Config
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
-                    "role",
+                    "roles",
                     "tedu_microservices_api.read",
                     "tedu_microservices_api.write",
                 }
@@ -89,12 +90,16 @@ public static class Config
                 RequireConsent = false,
                 AccessTokenLifetime = 60 * 60 * 2,
                 AllowOfflineAccess = true,
+                RedirectUris = new List<string>
+                {
+                    "https://www.getpostman.com/oauth2/callback"
+                },
                 AllowedScopes =
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
-                    "role",
+                    "roles",
                     "tedu_microservices_api.read",
                     "tedu_microservices_api.write",
                 }

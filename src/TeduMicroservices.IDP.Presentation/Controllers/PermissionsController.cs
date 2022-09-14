@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TeduMicroservices.IDP.Infrastructure.Repositories;
 using TeduMicroservices.IDP.Infrastructure.ViewModels;
@@ -8,6 +9,7 @@ namespace TeduMicroservices.IDP.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]/roles/{roleId}")]
+[Authorize("Bearer")]
 public class PermissionsController : ControllerBase
 {
     private readonly IRepositoryManager _repository;

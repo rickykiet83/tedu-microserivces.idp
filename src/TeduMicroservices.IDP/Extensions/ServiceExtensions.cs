@@ -102,6 +102,60 @@ public static class ServiceExtensions
                     Url = new Uri("https://kietpham.dev")
                 }
             });
+            var identityServerBaseUrl = configuration.GetSection("IdentityServer:BaseUrl").Value;
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.OAuth2,
+                Flows = new OpenApiOAuthFlows
+                {
+                    Implicit = new OpenApiOAuthFlow
+                    {
+                        AuthorizationUrl = new Uri($"{identityServerBaseUrl}/connect/authorize"),
+                        Scopes = new Dictionary<string, string>
+                        {
+                            { "tedu_microservices_api.read", "Tedu Microservices API Read Scope" },
+                            { "tedu_microservices_api.write", "Tedu Microservices API Write Scope" }
+                        }
+                    }
+                }
+            });
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                    },
+                    new List<string>
+                    {
+                        "tedu_microservices_api.read", 
+                        "tedu_microservices_api.write"
+                    }
+                }
+            });
         });
+    }
+    
+    public static void ConfigureAuthentication(this IServiceCollection services)
+    {
+        services
+            .AddAuthentication()
+            .AddLocalApi("Bearer", option =>
+            {
+                option.ExpectedScope = "tedu_microservices_api.read";
+            });
+    }
+
+    public static void ConfigureAuthorization(this IServiceCollection services)
+    {
+        services.AddAuthorization(
+            options =>
+            {
+                options.AddPolicy("Bearer", policy =>
+                {
+                    policy.AddAuthenticationSchemes("Bearer");
+                    policy.RequireAuthenticatedUser();
+                });
+            });
     }
 }

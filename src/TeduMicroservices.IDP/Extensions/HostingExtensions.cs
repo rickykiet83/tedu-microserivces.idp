@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using TeduMicroservices.IDP.Infrastructure.Domains;
@@ -75,8 +77,10 @@ internal static class HostingExtensions
         {
             config.RespectBrowserAcceptHeader = true;
             config.ReturnHttpNotAcceptable = true;
+            config.Filters.Add(new ProducesAttribute("application/json", "text/plain", "text/json"));
         }).AddApplicationPart(typeof(AssemblyReference).Assembly);
-
+        builder.Services.ConfigureAuthentication();
+        builder.Services.ConfigureAuthorization();
         builder.Services.ConfigureSwagger(builder.Configuration);
         builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
         return builder.Build();
@@ -93,20 +97,29 @@ internal static class HostingExtensions
 
         // uncomment if you want to add a UI
         app.UseStaticFiles();
+        app.UseForwardedHeaders(new ForwardedHeadersOptions
+        {
+            ForwardedHeaders = ForwardedHeaders.All
+        });
         app.UseCors("CorsPolicy");
         app.UseSwagger();
-        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tedu Identity API"));
+        app.UseSwaggerUI(c =>
+        {
+            c.OAuthClientId("tedu_microservices_swagger");
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tedu Identity API");
+            c.DisplayRequestDuration();
+        });
         app.UseRouting();
+        app.UseMiddleware<ErrorWrappingMiddleware>();
         //set cookie policy before authentication/authorization setup
         app.UseCookiePolicy();
-        
         app.UseIdentityServer();
 
         // uncomment if you want to add a UI
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapDefaultControllerRoute().RequireAuthorization();
+            endpoints.MapDefaultControllerRoute().RequireAuthorization("Bearer");
             endpoints.MapRazorPages().RequireAuthorization();
         });
 
