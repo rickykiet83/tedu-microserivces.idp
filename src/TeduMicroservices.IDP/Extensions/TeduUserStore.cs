@@ -19,7 +19,7 @@ public class TeduUserStore : UserStore<User, IdentityRole, TeduIdentityContext>
         var query = from userRole in Context.UserRoles
             join role in Context.Roles on userRole.RoleId equals role.Id
             where userRole.UserId.Equals(user.Id)
-            select role.Id.ToString(); // select role Id
+            select role.Id; // select role Id
         return await query.ToListAsync(cancellationToken);
     }
 }
