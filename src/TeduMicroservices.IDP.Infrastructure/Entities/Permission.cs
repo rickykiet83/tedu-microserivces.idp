@@ -13,6 +13,12 @@ public class Permission : EntityBase<long>
         Command = command.ToUpper();
         RoleId = roleId;
     }
+    
+    public Permission(long id, string function, string command, string roleId) 
+        : this(function, command, roleId)
+    {
+        Id = id;
+    }
 
     [Key]
     [MaxLength(50)]

@@ -82,6 +82,7 @@ public static class ServiceExtensions
                 opt.Lockout.MaxFailedAccessAttempts = 3;
             })
             .AddEntityFrameworkStores<TeduIdentityContext>()
+            .AddUserStore<TeduUserStore>()
             .AddDefaultTokenProviders();
     }
 

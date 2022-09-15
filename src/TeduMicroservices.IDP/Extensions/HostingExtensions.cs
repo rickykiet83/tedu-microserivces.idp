@@ -58,6 +58,7 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddConfigurationSettings(builder.Configuration);
+        builder.Services.AddAutoMapper(typeof(Program));
         // uncomment if you want to add a UI
         builder.Services.AddRazorPages();
 
