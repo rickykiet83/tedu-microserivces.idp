@@ -4,6 +4,7 @@ using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
+using TeduMicroservices.IDP.Common;
 using TeduMicroservices.IDP.Infrastructure.Common;
 using TeduMicroservices.IDP.Infrastructure.Entities;
 using TeduMicroservices.IDP.Infrastructure.Repositories;
@@ -35,8 +36,9 @@ public class IdentityProfileService : IProfileService
         var principal = await _claimsFactory.CreateAsync(user);
         var claims = principal.Claims.ToList();
         var roles = await _userManager.GetRolesAsync(user);
-        var permissions = await _repositoryManager.Permission.GetPermissionsByUser(user);
-        
+        var permissionQuery = await _repositoryManager.Permission.GetPermissionsByUser(user);
+        var permissions = permissionQuery.Select(x => PermissionHelper
+            .GetPermission(x.Function, x.Command));
         //Add more claims like this
         claims.Add(new Claim(SystemConstants.Claims.FirstName, user.FirstName));
         claims.Add(new Claim(SystemConstants.Claims.LastName, user.LastName));
