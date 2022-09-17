@@ -52,23 +52,26 @@ public static class Config
                 RedirectUris = new List<string>()
                 {
                     "http://localhost:5001/swagger/oauth2-redirect.html",
+                    "http://localhost:5002/swagger/oauth2-redirect.html",
                 },
                 PostLogoutRedirectUris = new List<string>()
                 {
                     "http://localhost:5001/swagger/oauth2-redirect.html",
+                    "http://localhost:5002/swagger/oauth2-redirect.html",
                 },
                 AllowedCorsOrigins = new List<string>()
                 {
-                    "http://localhost:5001"
+                    "http://localhost:5001",
+                    "http://localhost:5002",
                 },
                 AllowedScopes =
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
-                    "roles",
                     "tedu_microservices_api.read",
                     "tedu_microservices_api.write",
+                    "tedu_microservices_api"
                 }
             },
             new()

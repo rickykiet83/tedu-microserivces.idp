@@ -31,6 +31,7 @@ public static class ServiceExtensions
     public static void ConfigureIdentityServer(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("IdentitySqlConnection");
+        var issuerUri = configuration.GetSection("IdentityServer:IssuerUri").Value;
         services.AddIdentityServer(options =>
             {
                 // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
@@ -39,6 +40,7 @@ public static class ServiceExtensions
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
+                options.IssuerUri = issuerUri;
             })
             // not recommended for production - you need to store your key material somewhere secure
             .AddDeveloperSigningCredential()
