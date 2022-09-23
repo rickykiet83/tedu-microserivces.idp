@@ -30,7 +30,6 @@ public static class ServiceExtensions
     
     public static void ConfigureIdentityServer(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("IdentitySqlConnection");
         var issuerUri = configuration.GetSection("IdentityServer:IssuerUri").Value;
         services.AddIdentityServer(options =>
             {
@@ -44,11 +43,16 @@ public static class ServiceExtensions
             })
             // not recommended for production - you need to store your key material somewhere secure
             .AddDeveloperSigningCredential()
-            // .AddInMemoryIdentityResources(Config.IdentityResources)
-            // .AddInMemoryApiScopes(Config.ApiScopes)
-            // .AddInMemoryClients(Config.Clients)
-            // .AddInMemoryApiResources(Config.ApiResources)
-            // .AddTestUsers(TestUsers.Users)
+            .UseIdentityServerStoreConfig(configuration)
+            .AddAspNetIdentity<User>()
+            .AddProfileService<IdentityProfileService>()
+            ;
+    }
+
+    private static IIdentityServerBuilder UseIdentityServerStoreConfig(this IIdentityServerBuilder builder, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetConnectionString("IdentitySqlConnection");
+        builder
             .AddConfigurationStore(opt =>
             {
                 opt.ConfigureDbContext = c => c.UseSqlServer(
@@ -60,12 +64,10 @@ public static class ServiceExtensions
                 opt.ConfigureDbContext = c => c.UseSqlServer(
                     connectionString,
                     buider => buider.MigrationsAssembly("TeduMicroservices.IDP"));
-            })
-            .AddAspNetIdentity<User>()
-            .AddProfileService<IdentityProfileService>()
-            ;
+            });
+        return builder;
     }
-    
+
     public static void ConfigureIdentity(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("IdentitySqlConnection");
