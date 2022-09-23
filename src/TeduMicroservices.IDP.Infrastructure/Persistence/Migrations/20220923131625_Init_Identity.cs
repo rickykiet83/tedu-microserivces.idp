@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace TeduMicroservices.IDP.Persistence.Migrations
+namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
 {
     public partial class Init_Identity : Migration
     {
@@ -94,7 +94,7 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                     Id = table.Column<string>(type: "varchar(50)", nullable: false),
                     FirstName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true),
                     Email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
@@ -130,17 +130,48 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                     table.PrimaryKey("PK_UserTokens", x => x.UserId);
                 });
 
-            migrationBuilder.InsertData(
+            migrationBuilder.CreateTable(
+                name: "Permissions",
                 schema: "Identity",
-                table: "Roles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "700d5062-2c73-41fc-b25a-572e886faa40", "e2c42739-264f-4792-830c-9da46a98ff6e", "Customer", "CUSTOMER" });
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Function = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
+                    RoleId = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Command = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Permissions_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalSchema: "Identity",
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.InsertData(
                 schema: "Identity",
                 table: "Roles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "9d9e2348-0760-4dec-9189-c7a49b3c20e3", "b6818f46-ee2e-46f6-a262-3cc4b318dfc0", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "6fd79e7a-b2af-4638-89df-ee76cb132bf9", "a3d7f6df-5cc8-4c94-a9f3-047afe9ffd11", "Customer", "CUSTOMER" });
+
+            migrationBuilder.InsertData(
+                schema: "Identity",
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "d4973489-ab83-49da-93f7-66134e1b293d", "a171d7ed-18a7-4eb9-9bb0-23622285bef0", "Administrator", "ADMINISTRATOR" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permissions_RoleId_Function_Command",
+                schema: "Identity",
+                table: "Permissions",
+                columns: new[] { "RoleId", "Function", "Command" },
+                unique: true,
+                filter: "[Function] IS NOT NULL AND [Command] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
@@ -152,11 +183,11 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RoleClaims",
+                name: "Permissions",
                 schema: "Identity");
 
             migrationBuilder.DropTable(
-                name: "Roles",
+                name: "RoleClaims",
                 schema: "Identity");
 
             migrationBuilder.DropTable(
@@ -177,6 +208,10 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "Roles",
                 schema: "Identity");
         }
     }

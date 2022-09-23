@@ -12,8 +12,11 @@ try
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
-    
-    SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
+
+    if (app.Environment.IsDevelopment())
+    {
+        SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
+    }
     
     app.MigrateDatabase()
         .Run();

@@ -8,7 +8,7 @@ Identity Server for Tedu Microservices Course.
 
 ## Docker Command Examples
 
-- docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remove-orphans --build
+- docker-compose -f docker-compose.yml up -d --remove-orphans --build
 
 ## Application URLs - PRODUCTION:
 
@@ -22,8 +22,11 @@ Identity Server for Tedu Microservices Course.
 ## References URLS
 
 
-## Migrations commands:
-
+## Migrations commands (cd into TeduMicroservices.IDP project):
+- dotnet ef database update -c PersistedGrantDbContext
+- dotnet ef database update -c ConfigurationDbContext
+- dotnet ef migrations add "Init_Identity" -c TeduIdentityContext -s TeduMicroservices.IDP.csproj -p ../TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj
+- dotnet ef database update -c TeduIdentityContext -s TeduMicroservices.IDP.csproj -p ../TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj
 
 ## Useful commands:
 

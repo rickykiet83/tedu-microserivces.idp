@@ -3,21 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeduMicroservices.IDP.Persistence;
 
 #nullable disable
 
-namespace TeduMicroservices.IDP.Persistence.Migrations
+namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TeduIdentityContext))]
-    partial class TeduIdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20220923131625_Init_Identity")]
+    partial class Init_Identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -46,15 +48,15 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "30ac89cb-fafa-487f-a101-bc6346c9e50b",
-                            ConcurrencyStamp = "42f3f05a-4f7c-4b70-9c29-68c96f0fd1e2",
+                            Id = "d4973489-ab83-49da-93f7-66134e1b293d",
+                            ConcurrencyStamp = "a171d7ed-18a7-4eb9-9bb0-23622285bef0",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "c86adf1d-e69b-49a1-b6d9-97b3eace4792",
-                            ConcurrencyStamp = "e40739fb-1081-4c98-9194-3382e58a32ce",
+                            Id = "6fd79e7a-b2af-4638-89df-ee76cb132bf9",
+                            ConcurrencyStamp = "a3d7f6df-5cc8-4c94-a9f3-047afe9ffd11",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -154,7 +156,7 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                     b.ToTable("UserTokens", "Identity");
                 });
 
-            modelBuilder.Entity("TeduMicroservices.IDP.Entities.Permission", b =>
+            modelBuilder.Entity("TeduMicroservices.IDP.Infrastructure.Entities.Permission", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -184,7 +186,7 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                     b.ToTable("Permissions", "Identity");
                 });
 
-            modelBuilder.Entity("TeduMicroservices.IDP.Entities.User", b =>
+            modelBuilder.Entity("TeduMicroservices.IDP.Infrastructure.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(50)");
@@ -193,6 +195,7 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -259,7 +262,7 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                     b.ToTable("Users", "Identity");
                 });
 
-            modelBuilder.Entity("TeduMicroservices.IDP.Entities.Permission", b =>
+            modelBuilder.Entity("TeduMicroservices.IDP.Infrastructure.Entities.Permission", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
                         .WithMany()

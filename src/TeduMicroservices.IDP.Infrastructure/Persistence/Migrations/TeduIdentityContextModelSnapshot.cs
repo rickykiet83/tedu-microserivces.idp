@@ -3,23 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeduMicroservices.IDP.Persistence;
 
 #nullable disable
 
-namespace TeduMicroservices.IDP.Persistence.Migrations
+namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TeduIdentityContext))]
-    [Migration("20220909011547_Init_Identity")]
-    partial class Init_Identity
+    partial class TeduIdentityContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -48,15 +46,15 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9d9e2348-0760-4dec-9189-c7a49b3c20e3",
-                            ConcurrencyStamp = "b6818f46-ee2e-46f6-a262-3cc4b318dfc0",
+                            Id = "d4973489-ab83-49da-93f7-66134e1b293d",
+                            ConcurrencyStamp = "a171d7ed-18a7-4eb9-9bb0-23622285bef0",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "700d5062-2c73-41fc-b25a-572e886faa40",
-                            ConcurrencyStamp = "e2c42739-264f-4792-830c-9da46a98ff6e",
+                            Id = "6fd79e7a-b2af-4638-89df-ee76cb132bf9",
+                            ConcurrencyStamp = "a3d7f6df-5cc8-4c94-a9f3-047afe9ffd11",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -156,7 +154,37 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                     b.ToTable("UserTokens", "Identity");
                 });
 
-            modelBuilder.Entity("TeduMicroservices.IDP.Entities.User", b =>
+            modelBuilder.Entity("TeduMicroservices.IDP.Infrastructure.Entities.Permission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Command")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Function")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId", "Function", "Command")
+                        .IsUnique()
+                        .HasFilter("[Function] IS NOT NULL AND [Command] IS NOT NULL");
+
+                    b.ToTable("Permissions", "Identity");
+                });
+
+            modelBuilder.Entity("TeduMicroservices.IDP.Infrastructure.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(50)");
@@ -165,6 +193,7 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -229,6 +258,17 @@ namespace TeduMicroservices.IDP.Persistence.Migrations
                     b.HasIndex("Email");
 
                     b.ToTable("Users", "Identity");
+                });
+
+            modelBuilder.Entity("TeduMicroservices.IDP.Infrastructure.Entities.Permission", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }
