@@ -7,8 +7,9 @@ Identity Server for Tedu Microservices Course.
 - Identity API: http://localhost:5001
 
 ## Docker Command Examples
-
-- docker-compose -f docker-compose.yml up -d --remove-orphans --build
+- Create a ".env" file at the same location with docker-compose.yml file:
+  COMPOSE_PROJECT_NAME=tedu_identity
+- run command: docker-compose -f docker-compose.yml up -d --remove-orphans --build
 
 ## Application URLs - PRODUCTION:
 

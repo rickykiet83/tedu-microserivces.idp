@@ -1,5 +1,4 @@
-version: '3.8'
-
+version: '3.9'
 services:
   # database section
   teduidentitydb:
@@ -26,7 +25,7 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - "ConnectionStrings:IdentitySqlConnection=Server=teduidentitydb;Database=TeduIdentity;User Id=sa;Password=Passw0rd!;Multipleactiveresultsets=true"
       - "IdentityServer:BaseUrl=http://localhost:6001"
-      - "IdentityServer:IssuerUri=http://localhost:6001"
+      - "IdentityServer:IssuerUri=http://tedu.identity.api"
     depends_on: 
       - teduidentitydb
     ports:
