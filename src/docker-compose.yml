@@ -24,7 +24,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "ConnectionStrings:IdentitySqlConnection=Server=teduidentitydb,1436;Database=TeduIdentity;User Id=sa;Password=Passw0rd!;Multipleactiveresultsets=true"
+      - "ConnectionStrings:IdentitySqlConnection=Server=teduidentitydb;Database=TeduIdentity;User Id=sa;Password=Passw0rd!;Multipleactiveresultsets=true"
     depends_on: 
       - teduidentitydb
     ports:
