@@ -25,7 +25,7 @@ Identity Server for Tedu Microservices Course.
 ## Migrations commands (cd into TeduMicroservices.IDP project):
 - dotnet ef database update -c PersistedGrantDbContext
 - dotnet ef database update -c ConfigurationDbContext
-- dotnet ef migrations add "Init_Identity" -c TeduIdentityContext -s TeduMicroservices.IDP.csproj -p ../TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj
+- dotnet ef migrations add "Init_Identity" -c TeduIdentityContext -s TeduMicroservices.IDP.csproj -p ../TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj -o Persistence/Migrations
 - dotnet ef database update -c TeduIdentityContext -s TeduMicroservices.IDP.csproj -p ../TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj
 
 ## Useful commands:
