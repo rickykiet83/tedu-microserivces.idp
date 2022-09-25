@@ -1,6 +1,6 @@
 # Tedu Microservices Identity Project
 Identity Server for Tedu Microservices Course.
-- Tedu Microservice Course : [https://tedu.com.vn/khoa-hoc](https://tedu.com.vn/khoa-hoc/xay-dung-he-thong-voi-kien-truc-micro-service-49.html)
+- Tedu Microservice Course : [https://tedu.com.vn/khoa-hoc](https://tedu.com.vn/course-ref/49/C5D7O1.html)
 
 ## Application URLs - DEVELOPMENT:
 
