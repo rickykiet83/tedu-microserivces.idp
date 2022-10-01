@@ -1,3 +1,5 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -57,6 +59,7 @@ internal static class HostingExtensions
     
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
+        builder.Services.AddControllersWithViews();
         builder.Services.AddConfigurationSettings(builder.Configuration);
         builder.Services.AddAutoMapper(typeof(Program));
         // uncomment if you want to add a UI
@@ -84,6 +87,7 @@ internal static class HostingExtensions
         builder.Services.ConfigureAuthorization();
         builder.Services.ConfigureSwagger(builder.Configuration);
         builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+        builder.Services.ConfigureHealthChecks(builder.Configuration);
         return builder.Build();
     }
     
@@ -118,8 +122,14 @@ internal static class HostingExtensions
 
         // uncomment if you want to add a UI
         app.UseAuthorization();
+        
         app.UseEndpoints(endpoints =>
         {
+            endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
             endpoints.MapDefaultControllerRoute().RequireAuthorization("Bearer");
             endpoints.MapRazorPages().RequireAuthorization();
         });

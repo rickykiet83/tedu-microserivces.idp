@@ -1,30 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2EFCB6A3-C375-40BC-A808-AB07626BA991}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeduMicroservices.IDP", "src\TeduMicroservices.IDP\TeduMicroservices.IDP.csproj", "{0ED4128E-E440-4794-9B45-FD8406FC9347}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduMicroservices.IDP", "src\TeduMicroservices.IDP\TeduMicroservices.IDP.csproj", "{0ED4128E-E440-4794-9B45-FD8406FC9347}"
 EndProject
-
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5C59DF9A-92A3-498F-9C2A-31D0332CF4C7}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
+		src\.env = src\.env
 		src\docker-compose.yml = src\docker-compose.yml
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeduMicroservices.IDP.Presentation", "src\TeduMicroservices.IDP.Presentation\TeduMicroservices.IDP.Presentation.csproj", "{3B3E26B7-40B9-405E-B4B7-B862064EB5AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduMicroservices.IDP.Presentation", "src\TeduMicroservices.IDP.Presentation\TeduMicroservices.IDP.Presentation.csproj", "{3B3E26B7-40B9-405E-B4B7-B862064EB5AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeduMicroservices.IDP.Infrastructure", "src\TeduMicroservices.IDP.Infrastructure\TeduMicroservices.IDP.Infrastructure.csproj", "{8E5B2CA2-F7E4-4C06-81BE-A19B9610ED3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduMicroservices.IDP.Infrastructure", "src\TeduMicroservices.IDP.Infrastructure\TeduMicroservices.IDP.Infrastructure.csproj", "{8E5B2CA2-F7E4-4C06-81BE-A19B9610ED3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0ED4128E-E440-4794-9B45-FD8406FC9347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -40,9 +37,15 @@ Global
 		{8E5B2CA2-F7E4-4C06-81BE-A19B9610ED3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E5B2CA2-F7E4-4C06-81BE-A19B9610ED3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0ED4128E-E440-4794-9B45-FD8406FC9347} = {2EFCB6A3-C375-40BC-A808-AB07626BA991}
 		{3B3E26B7-40B9-405E-B4B7-B862064EB5AE} = {2EFCB6A3-C375-40BC-A808-AB07626BA991}
 		{8E5B2CA2-F7E4-4C06-81BE-A19B9610ED3B} = {2EFCB6A3-C375-40BC-A808-AB07626BA991}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C169517-D615-4125-8E93-CC272B488EC9}
 	EndGlobalSection
 EndGlobal

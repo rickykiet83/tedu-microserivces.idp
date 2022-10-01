@@ -7,6 +7,8 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
     <PackageReference Include="Duende.IdentityServer" Version="6.1.5" />
     <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.1.5" />
     <PackageReference Include="Duende.IdentityServer.EntityFramework" Version="6.1.5" />
