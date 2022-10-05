@@ -1,0 +1,14 @@
+IDP:
+
+cd into IDP
+type: dotnet publish -c Release -o Public
+
+
+- Create a new resource group: tedumicroservices-rs
+- Create a new App Service Plan: tedumicroservices-asp-linux - Choose Basic B1 plan
+- Create a new sql server: user: tedu, pass: apPTPtkd3m, servername: teduserver
+- Create a new database: TeduIdentity
+- Connection string: Server=tcp:teduserver.database.windows.net,1433;Initial Catalog=TeduIdentity;Persist Security Info=False;User ID=tedu;Password=apPTPtkd3m;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+- Open Project and cd into TeduMicroservices.IDP and Create a new appsettings.Production.json file, and update new connection string
+- Open terminal and type: dotnet publish -c Release -o Public (make sure all the files are copy to Public folder)
+- Create a new web app service, name: identity-tedu.azurewebsites.net

@@ -99,5 +99,6 @@ bld/
 [Ll]ogs/
 
 **/appsettings.Development.json
+**/appsettings.Production.json
 .idea/.idea.OctoQual/.idea
 **/~$*.xlsx

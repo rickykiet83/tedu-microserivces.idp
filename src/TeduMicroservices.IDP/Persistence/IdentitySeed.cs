@@ -16,9 +16,13 @@ public static class IdentitySeed
 
         using var context = scope.ServiceProvider
             .GetRequiredService<ConfigurationDbContext>();
-     
+
+        using var teduContext = scope.ServiceProvider
+            .GetRequiredService<TeduIdentityContext>();
+
         try
         {
+            teduContext.Database.Migrate();
             context.Database.Migrate();
 
             if (!context.Clients.Any())
