@@ -29,26 +29,27 @@ public class ErrorWrappingMiddleware
             context.Response.StatusCode = 500;
         }
 
-        if (!context.Response.HasStarted && context.Response.StatusCode == 401)
+        if (!context.Response.HasStarted && (context.Response.StatusCode == StatusCodes.Status403Forbidden ||
+                                             context.Response.StatusCode == StatusCodes.Status401Unauthorized))
         {
             context.Response.ContentType = "application/json";
 
-            var response = new ApiErrorResult<bool>("Unauthorized");
-            
-            var json = JsonSerializer.Serialize(response);
-            
-            await context.Response.WriteAsync(json);
+            var response = new ApiErrorResult<bool>("You are not authorized!");
 
+            var json = JsonSerializer.Serialize(response);
+
+            await context.Response.WriteAsync(json);
         }
 
-        else if (!context.Response.HasStarted && context.Response.StatusCode != 204)
+        if (!context.Response.HasStarted && context.Response.StatusCode != 204 &&
+            context.Response.StatusCode != 200)
         {
             context.Response.ContentType = "application/json";
-        
+
             var response = new ApiErrorResult<bool>(errorMsg);
-        
+
             var json = JsonSerializer.Serialize(response);
-        
+
             await context.Response.WriteAsync(json);
         }
     }

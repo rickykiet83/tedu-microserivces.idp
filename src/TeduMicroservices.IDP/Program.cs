@@ -15,10 +15,10 @@ try
 
     app.MigrateDatabase();
 
-    if (app.Environment.IsDevelopment())
-    {
-        SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
-    }
+    //if (app.Environment.IsDevelopment())
+    //{
+    SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
+    //}
     
     app.Run();
 }
