@@ -29,7 +29,8 @@ public class ErrorWrappingMiddleware
             context.Response.StatusCode = 500;
         }
 
-        if (!context.Response.HasStarted && context.Response.StatusCode == 401)
+        if (!context.Response.HasStarted && (context.Response.StatusCode == StatusCodes.Status401Unauthorized) ||
+            context.Response.StatusCode == StatusCodes.Status403Forbidden)
         {
             context.Response.ContentType = "application/json";
 
@@ -41,7 +42,8 @@ public class ErrorWrappingMiddleware
 
         }
 
-        else if (!context.Response.HasStarted && context.Response.StatusCode != 204)
+        else if (!context.Response.HasStarted && (context.Response.StatusCode != StatusCodes.Status204NoContent &&
+            context.Response.StatusCode != StatusCodes.Status202Accepted && context.Response.StatusCode != StatusCodes.Status200OK))
         {
             context.Response.ContentType = "application/json";
         

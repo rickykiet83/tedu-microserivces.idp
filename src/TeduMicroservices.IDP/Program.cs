@@ -13,13 +13,14 @@ try
         .ConfigureServices()
         .ConfigurePipeline();
 
-    if (app.Environment.IsDevelopment())
-    {
+    app.MigrateDatabase();
+
+    //if (app.Environment.IsDevelopment())
+    //{
         SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
-    }
+    //}
     
-    app.MigrateDatabase()
-        .Run();
+    app.Run();
 }
 
 catch (Exception ex)
