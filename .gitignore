@@ -99,5 +99,9 @@ bld/
 [Ll]ogs/
 
 **/appsettings.Development.json
+**/appsettings.Production.json
+src/TeduMicroservices.IDP/Public/**
 .idea/.idea.OctoQual/.idea
 **/~$*.xlsx
+src/TeduMicroservices.IDP/Properties/PublishProfiles/
+src/TeduMicroservices.IDP/Properties/ServiceDependencies/

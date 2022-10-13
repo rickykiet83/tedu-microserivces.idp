@@ -5,6 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Public\**" />
+    <Content Remove="Public\**" />
+    <EmbeddedResource Remove="Public\**" />
+    <None Remove="Public\**" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
@@ -27,4 +34,6 @@
     <ProjectReference Include="..\TeduMicroservices.IDP.Infrastructure\TeduMicroservices.IDP.Infrastructure.csproj" />
     <ProjectReference Include="..\TeduMicroservices.IDP.Presentation\TeduMicroservices.IDP.Presentation.csproj" />
   </ItemGroup>
+  
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1production_1json__JsonSchema="https://appliedengdesign.github.io/cnccodes-json-schema/draft/2022-07/schema" /></VisualStudio></ProjectExtensions>
 </Project>
