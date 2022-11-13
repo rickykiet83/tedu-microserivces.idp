@@ -34,9 +34,9 @@ services:
 
 networks:
   default:
-    external:
-      name: tedu_microservices
-    
+    name: tedu_microservices
+    external: true
+
 volumes:
   tedu_identity_sqlserver_data:
     external: false

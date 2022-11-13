@@ -17,7 +17,7 @@ try
 
     //if (app.Environment.IsDevelopment())
     //{
-        SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
+    SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
     //}
     
     app.Run();

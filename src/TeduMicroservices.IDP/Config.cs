@@ -57,6 +57,8 @@ public static class Config
                     "http://localhost:5002/swagger/oauth2-redirect.html",
                     "http://localhost:6002/swagger/oauth2-redirect.html",
                     "http://localhost:6020/swagger/oauth2-redirect.html",
+                    "https://apigw-tedu.azurewebsites.net/swagger/oauth2-redirect.html",
+                    "https://product-tedu.azurewebsites.net/swagger/oauth2-redirect.html"
                 },
                 PostLogoutRedirectUris = new List<string>()
                 {
@@ -66,6 +68,8 @@ public static class Config
                     "http://localhost:5002/swagger/oauth2-redirect.html",
                     "http://localhost:6002/swagger/oauth2-redirect.html",
                     "http://localhost:6020/swagger/oauth2-redirect.html",
+                    "https://apigw-tedu.azurewebsites.net/swagger/oauth2-redirect.html",
+                    "https://product-tedu.azurewebsites.net/swagger/oauth2-redirect.html"
                 },
                 AllowedCorsOrigins = new List<string>()
                 {
@@ -75,6 +79,8 @@ public static class Config
                     "http://localhost:5002",
                     "http://localhost:6002",
                     "http://localhost:6020",
+                    "https://apigw-tedu.azurewebsites.net",
+                    "https://product-tedu.azurewebsites.net"
                 },
                 AllowedScopes =
                 {
