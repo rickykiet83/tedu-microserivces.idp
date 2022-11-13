@@ -1,4 +1,4 @@
-# Tedu Microservices Identity Project
+﻿# Tedu Microservices Identity Project
 Identity Server for Tedu Microservices Course.
 - Tedu Microservice Course : [https://tedu.com.vn/khoa-hoc](https://tedu.com.vn/course-ref/49/C5D7O1.html)
 
@@ -22,6 +22,13 @@ Identity Server for Tedu Microservices Course.
 
 ## References URLS
 
+## Recommended Courses:
+- Làm chủ Docker để chinh phục DevOps: https://tedu.com.vn/course-ref/42/C5D7O1.html
+- Tedu Exam course (MongoDb, DDD, CQRS, Identity Server): https://tedu.com.vn/course-ref/43/C5D7O1.html
+- Authentication và Authorization nâng cao: https://tedu.com.vn/course-ref/36/C5D7O1.html
+- Xây dựng ứng dụng web với ASP.NET Core Web API + Identity Server + Angular: https://tedu.com.vn/course-ref/35/C5D7O1.htm
+- Phát triển Web App với .NET 6 (ABP Framework & Angular): https://tedu.com.vn/course-ref/50/C5D7O1.html
+- Triển khai CI/CD với Azure DevOps: https://tedu.com.vn/course-ref/37/C5D7O1.html
 
 ## Migrations commands (cd into TeduMicroservices.IDP project):
 - dotnet ef database update -c PersistedGrantDbContext
