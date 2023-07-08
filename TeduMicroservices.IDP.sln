@@ -18,6 +18,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduMicroservices.IDP.Prese
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduMicroservices.IDP.Infrastructure", "src\TeduMicroservices.IDP.Infrastructure\TeduMicroservices.IDP.Infrastructure.csproj", "{8E5B2CA2-F7E4-4C06-81BE-A19B9610ED3B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseScripts", "DatabaseScripts", "{0E08F5F2-82E4-4C52-9CA4-F8DC01552BDE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Store Procedures", "Store Procedures", "{2A35CBA5-8B64-4ED0-8661-BB57A08B5296}"
+	ProjectSection(SolutionItems) = preProject
+		DatabaseScripts\Store Procedures\Create_Permission.sql = DatabaseScripts\Store Procedures\Create_Permission.sql
+		DatabaseScripts\Store Procedures\Delete_Permission.sql = DatabaseScripts\Store Procedures\Delete_Permission.sql
+		DatabaseScripts\Store Procedures\Get_Permission_ByRoleId.sql = DatabaseScripts\Store Procedures\Get_Permission_ByRoleId.sql
+		DatabaseScripts\Store Procedures\Update_Permissions_ByRole.sql = DatabaseScripts\Store Procedures\Update_Permissions_ByRole.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +54,8 @@ Global
 		{0ED4128E-E440-4794-9B45-FD8406FC9347} = {2EFCB6A3-C375-40BC-A808-AB07626BA991}
 		{3B3E26B7-40B9-405E-B4B7-B862064EB5AE} = {2EFCB6A3-C375-40BC-A808-AB07626BA991}
 		{8E5B2CA2-F7E4-4C06-81BE-A19B9610ED3B} = {2EFCB6A3-C375-40BC-A808-AB07626BA991}
+		{0E08F5F2-82E4-4C52-9CA4-F8DC01552BDE} = {5C59DF9A-92A3-498F-9C2A-31D0332CF4C7}
+		{2A35CBA5-8B64-4ED0-8661-BB57A08B5296} = {0E08F5F2-82E4-4C52-9CA4-F8DC01552BDE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C169517-D615-4125-8E93-CC272B488EC9}
