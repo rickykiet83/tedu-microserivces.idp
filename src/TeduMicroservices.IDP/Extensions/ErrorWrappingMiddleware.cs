@@ -41,8 +41,10 @@ public class ErrorWrappingMiddleware
             await context.Response.WriteAsync(json);
         }
 
-        else if (!context.Response.HasStarted && (context.Response.StatusCode != StatusCodes.Status204NoContent &&
-            context.Response.StatusCode != StatusCodes.Status202Accepted && context.Response.StatusCode != StatusCodes.Status200OK))
+        else if (!context.Response.HasStarted && context.Response.StatusCode != StatusCodes.Status204NoContent &&
+                 context.Response.StatusCode != StatusCodes.Status202Accepted &&
+                 context.Response.StatusCode != StatusCodes.Status200OK &&
+                 context.Response.ContentType != "text/html; charset=utf-8")
         {
             context.Response.ContentType = "application/json";
         
