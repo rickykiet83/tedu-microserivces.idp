@@ -2,7 +2,7 @@ version: '3.9'
 services:
   # database section
   teduidentitydb:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: teduidentitydb
     environment:
       SA_PASSWORD: "Passw0rd!"
