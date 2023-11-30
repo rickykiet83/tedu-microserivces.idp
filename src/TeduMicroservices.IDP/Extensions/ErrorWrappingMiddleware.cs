@@ -35,9 +35,9 @@ public class ErrorWrappingMiddleware
             context.Response.ContentType = "application/json";
 
             var response = new ApiErrorResult<bool>("Unauthorized");
-            
+
             var json = JsonSerializer.Serialize(response);
-            
+
             await context.Response.WriteAsync(json);
         }
 
@@ -47,11 +47,11 @@ public class ErrorWrappingMiddleware
                  context.Response.ContentType != "text/html; charset=utf-8")
         {
             context.Response.ContentType = "application/json";
-        
+
             var response = new ApiErrorResult<bool>(errorMsg);
-        
+
             var json = JsonSerializer.Serialize(response);
-        
+
             await context.Response.WriteAsync(json);
         }
     }

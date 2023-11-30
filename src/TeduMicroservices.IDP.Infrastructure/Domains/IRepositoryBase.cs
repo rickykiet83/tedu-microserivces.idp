@@ -30,19 +30,19 @@ public interface IRepositoryBase<T, K>
     Task DeleteListAsync(IEnumerable<T> entities);
 
     #endregion
-    
+
     #region Dapper
 
-    Task<IReadOnlyList<TModel>> QueryAsync<TModel>(string sql, object? param, 
+    Task<IReadOnlyList<TModel>> QueryAsync<TModel>(string sql, object? param,
         CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : EntityBase<K>;
 
-    Task<TModel> QueryFirstOrDefaultAsync<TModel>(string sql, object? param, 
+    Task<TModel> QueryFirstOrDefaultAsync<TModel>(string sql, object? param,
         CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : EntityBase<K>;
 
-    Task<TModel> QuerySingleAsync<TModel>(string sql, object? param, 
+    Task<TModel> QuerySingleAsync<TModel>(string sql, object? param,
         CommandType? commandType, IDbTransaction? transaction, int? commandTimeout) where TModel : EntityBase<K>;
 
-    Task<int> ExecuteAsync(string sql, object? param, 
+    Task<int> ExecuteAsync(string sql, object? param,
         CommandType? commandType, IDbTransaction? transaction, int? commandTimeout);
 
     #endregion Dapper

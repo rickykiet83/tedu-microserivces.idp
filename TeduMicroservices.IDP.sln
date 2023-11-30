@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		src\.env = src\.env
 		src\docker-compose.yml = src\docker-compose.yml
 		README.md = README.md
+		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduMicroservices.IDP.Presentation", "src\TeduMicroservices.IDP.Presentation\TeduMicroservices.IDP.Presentation.csproj", "{3B3E26B7-40B9-405E-B4B7-B862064EB5AE}"
@@ -26,6 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Store Procedures", "Store P
 		DatabaseScripts\Store Procedures\Delete_Permission.sql = DatabaseScripts\Store Procedures\Delete_Permission.sql
 		DatabaseScripts\Store Procedures\Get_Permission_ByRoleId.sql = DatabaseScripts\Store Procedures\Get_Permission_ByRoleId.sql
 		DatabaseScripts\Store Procedures\Update_Permissions_ByRole.sql = DatabaseScripts\Store Procedures\Update_Permissions_ByRole.sql
+		DatabaseScripts\Store Procedures\idp_stores.sql = DatabaseScripts\Store Procedures\idp_stores.sql
 	EndProjectSection
 EndProject
 Global

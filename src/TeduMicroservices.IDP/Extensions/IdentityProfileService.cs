@@ -23,7 +23,7 @@ public class IdentityProfileService : IProfileService
         _userManager = userManager;
         _repositoryManager = repositoryManager;
     }
-    
+
     public async Task GetProfileDataAsync(ProfileDataRequestContext context)
     {
         var sub = context.Subject.GetSubjectId();

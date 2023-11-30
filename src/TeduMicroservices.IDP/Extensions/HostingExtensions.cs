@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration.AzureKeyVault;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -13,17 +14,44 @@ namespace TeduMicroservices.IDP.Extensions;
 
 internal static class HostingExtensions
 {
-    internal static void AddAppConfigurations(this ConfigureHostBuilder host)
+    internal static void AddAppConfigurations(this WebApplicationBuilder builder)
     {
-        host.ConfigureAppConfiguration((context, config) =>
+        builder.Configuration
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true,
+                reloadOnChange: true)
+            .AddEnvironmentVariables();
+    }
+
+    private static void AddAzureKeyVaultManagedIdentityClientId(this WebApplicationBuilder builder)
+    {
+        var configuration = builder.Configuration;
+        var keyVaultName = configuration["Azure:KeyVaultName"];
+        if (string.IsNullOrEmpty(keyVaultName)) return;
+
+        var keyVaultUrl = new Uri($"https://{keyVaultName}.vault.azure.net/").ToString();
+        var clientId = configuration["Azure:ClientId"];
+        var clientSecret = configuration["Azure:ClientSecret"];
+
+        builder.Configuration.AddAzureKeyVault(keyVaultUrl, clientId, clientSecret,
+            new DefaultKeyVaultSecretManager());
+
+        var host = configuration.GetValue<string>("ConnectionStrings:Host");
+        var database = configuration.GetValue<string>("ConnectionStrings:Database");
+        var userId = configuration.GetValue<string>("ConnectionStrings:UserId");
+        var dbPasswordValue = configuration["db-password"]; //secret name in Azure Key Vault
+        if (string.IsNullOrEmpty(dbPasswordValue))
+            throw new ArgumentNullException("db-password is not configured in Azure Key Vault.");
+
+        var connectionString =
+            $"Server={host},1433;Initial Catalog={database};Persist Security Info=False;User ID={userId};Password={dbPasswordValue};MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
+
+        builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>
         {
-            var env = context.HostingEnvironment;
-            config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables();
+            { "ConnectionStrings:IdentitySqlConnection", connectionString }
         });
     }
-    
+
     public static void ConfigureSerilog(this ConfigureHostBuilder host)
     {
         host.UseSerilog((context, configuration) =>
@@ -56,9 +84,10 @@ internal static class HostingExtensions
                 .ReadFrom.Configuration(context.Configuration);
         });
     }
-    
+
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
+        builder.AddAzureKeyVaultManagedIdentityClientId();
         builder.Services.AddControllersWithViews();
         builder.Services.AddConfigurationSettings(builder.Configuration);
         builder.Services.AddAutoMapper(typeof(Program));
@@ -71,9 +100,9 @@ internal static class HostingExtensions
         builder.Services.ConfigureCors();
         builder.Services.ConfigureIdentity(builder.Configuration);
         builder.Services.ConfigureIdentityServer(builder.Configuration);
-        builder.Services.AddTransient(typeof(IUnitOfWork), 
+        builder.Services.AddTransient(typeof(IUnitOfWork),
             typeof(UnitOfWork));
-        builder.Services.AddTransient(typeof(IRepositoryBase<,>), 
+        builder.Services.AddTransient(typeof(IRepositoryBase<,>),
             typeof(RepositoryBase<,>));
         builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
         builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
@@ -90,11 +119,11 @@ internal static class HostingExtensions
         builder.Services.ConfigureHealthChecks(builder.Configuration);
         return builder.Build();
     }
-    
+
     public static WebApplication ConfigurePipeline(this WebApplication app)
-    { 
+    {
         app.UseSerilogRequestLogging();
-    
+
         if (app.Environment.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
@@ -122,7 +151,7 @@ internal static class HostingExtensions
 
         // uncomment if you want to add a UI
         app.UseAuthorization();
-        
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapHealthChecks("/hc", new HealthCheckOptions()

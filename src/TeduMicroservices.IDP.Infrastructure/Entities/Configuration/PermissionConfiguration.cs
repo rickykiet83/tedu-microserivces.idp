@@ -13,7 +13,7 @@ public class PermissionConfiguration : IEntityTypeConfiguration<Permission>
 
         builder.Property(x => x.Id)
             .ValueGeneratedOnAdd();
-        
+
         builder
             .HasIndex(c => new { c.RoleId, c.Function, c.Command })
             .IsUnique();

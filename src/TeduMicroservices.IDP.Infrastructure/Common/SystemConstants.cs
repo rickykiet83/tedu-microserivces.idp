@@ -3,7 +3,7 @@ namespace TeduMicroservices.IDP.Infrastructure.Common;
 public static class SystemConstants
 {
     public const string IdentitySchema = "Identity";
-    
+
     public static class Claims
     {
         public const string Roles = "roles";

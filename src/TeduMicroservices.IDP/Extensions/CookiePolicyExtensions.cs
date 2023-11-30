@@ -14,7 +14,7 @@ public static class CookiePolicyExtensions
                 CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
         });
     }
-    
+
     static void CheckSameSite(HttpContext httpContext, CookieOptions options)
     {
         if (options.SameSite != SameSiteMode.None && options.SameSite != SameSiteMode.Unspecified) return;

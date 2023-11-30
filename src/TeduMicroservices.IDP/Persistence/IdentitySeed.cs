@@ -6,33 +6,33 @@ namespace TeduMicroservices.IDP.Persistence;
 
 public static class IdentitySeed
 {
-    public static IHost MigrateDatabase(this IHost host)
+    public static async Task<IHost> MigrateDatabaseAsync(this IHost host, IConfiguration configuration)
     {
+        var connectionString = configuration.GetConnectionString("IdentitySqlConnection");
         using var scope = host.Services.CreateScope();
-        scope.ServiceProvider
-            .GetRequiredService<PersistedGrantDbContext>()
-            .Database
-            .Migrate();
 
-        using var context = scope.ServiceProvider
+        await using var context = scope.ServiceProvider
             .GetRequiredService<ConfigurationDbContext>();
+        context.Database.SetConnectionString(connectionString);
+        await context.Database.MigrateAsync();
 
-        using var teduContext = scope.ServiceProvider
+        await using var persistedGrantDbContext = scope.ServiceProvider
+            .GetRequiredService<PersistedGrantDbContext>();
+        persistedGrantDbContext.Database.SetConnectionString(connectionString);
+        await persistedGrantDbContext.Database.MigrateAsync();
+
+        await using var teduContext = scope.ServiceProvider
            .GetRequiredService<TeduIdentityContext>();
-
+        teduContext.Database.SetConnectionString(connectionString);
+        await teduContext.Database.MigrateAsync();
         try
         {
-            teduContext.Database.Migrate();
-            context.Database.Migrate();
-
             if (!context.Clients.Any())
             {
                 foreach (var client in Config.Clients)
                 {
                     context.Clients.Add(client.ToEntity());
                 }
-
-                context.SaveChanges();
             }
 
             if (!context.IdentityResources.Any())
@@ -41,8 +41,6 @@ public static class IdentitySeed
                 {
                     context.IdentityResources.Add(resource.ToEntity());
                 }
-
-                context.SaveChanges();
             }
 
             if (!context.ApiScopes.Any())
@@ -51,8 +49,6 @@ public static class IdentitySeed
                 {
                     context.ApiScopes.Add(apiScope.ToEntity());
                 }
-
-                context.SaveChanges();
             }
 
             if (!context.ApiResources.Any())
@@ -61,9 +57,10 @@ public static class IdentitySeed
                 {
                     context.ApiResources.Add(resource.ToEntity());
                 }
-
-                context.SaveChanges();
             }
+
+            await context.SaveChangesAsync();
+            await teduContext.SaveChangesAsync();
         }
         catch (Exception e)
         {

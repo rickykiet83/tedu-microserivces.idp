@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace  TeduMicroservices.IDP.Infrastructure.Common.ApiResult;
+namespace TeduMicroservices.IDP.Infrastructure.Common.ApiResult;
 
 public class ApiResult<T> : IActionResult
 {

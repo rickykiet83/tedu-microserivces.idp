@@ -16,7 +16,7 @@ public static class ServiceExtensions
         var emailSettings = configuration.GetSection(nameof(SMTPEmailSetting))
             .Get<SMTPEmailSetting>();
         services.AddSingleton(emailSettings);
-        
+
         return services;
     }
     public static void ConfigureCors(this IServiceCollection services)
@@ -29,7 +29,7 @@ public static class ServiceExtensions
                 .AllowAnyHeader());
         });
     }
-    
+
     public static void ConfigureIdentityServer(this IServiceCollection services, IConfiguration configuration)
     {
         var issuerUri = configuration.GetSection("IdentityServer:IssuerUri").Value;
@@ -135,14 +135,14 @@ public static class ServiceExtensions
                     },
                     new List<string>
                     {
-                        "tedu_microservices_api.read", 
+                        "tedu_microservices_api.read",
                         "tedu_microservices_api.write"
                     }
                 }
             });
         });
     }
-    
+
     public static void ConfigureAuthentication(this IServiceCollection services)
     {
         services

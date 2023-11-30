@@ -1,7 +1,7 @@
-IF EXISTS ( SELECT * 
-            FROM   sysobjects 
-            WHERE  id = object_id(N'[dbo].[Delete_Permission]') 
-                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+IF EXISTS ( SELECT *
+FROM sysobjects
+WHERE  id = object_id(N'[dbo].[Delete_Permission]')
+    and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
 BEGIN
     DROP PROCEDURE [dbo].[Delete_Permission]
 END
@@ -14,10 +14,10 @@ CREATE PROCEDURE [dbo].[Delete_Permission]
     @command varchar(50)
 AS
 BEGIN
-    DELETE 
-    FROM [Identity].Permissions 
+    DELETE
+    FROM [Identity].Permissions
     WHERE [RoleId] = @roleId
-    AND [Function] = @function
-    AND [Command] = @command
+        AND [Function] = @function
+        AND [Command] = @command
 END
 GO

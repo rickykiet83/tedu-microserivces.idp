@@ -22,7 +22,7 @@ public static class ModelBuilderExtensions
     {
         entity.ToTable("UserTokens", SystemConstants.IdentitySchema)
             .HasKey(x => new { x.UserId });
-        
+
         entity
             .Property(x => x.UserId)
             .IsRequired()
@@ -33,7 +33,7 @@ public static class ModelBuilderExtensions
     {
         entity.ToTable("UserLogins", SystemConstants.IdentitySchema)
             .HasKey(x => x.UserId);
-        
+
         entity
             .Property(x => x.UserId)
             .IsRequired()
@@ -44,7 +44,7 @@ public static class ModelBuilderExtensions
     {
         entity.ToTable("UserClaims", SystemConstants.IdentitySchema)
             .HasKey(x => x.Id);
-        
+
         entity
             .Property(x => x.UserId)
             .IsRequired()
@@ -55,7 +55,7 @@ public static class ModelBuilderExtensions
     {
         entity.ToTable("UserRoles", SystemConstants.IdentitySchema)
             .HasKey(x => new { x.UserId, x.RoleId });
-        
+
         entity
             .Property(x => x.UserId)
             .IsRequired()
@@ -70,7 +70,7 @@ public static class ModelBuilderExtensions
     {
         entity.ToTable("Roles", SystemConstants.IdentitySchema)
             .HasKey(x => x.Id);
-        
+
         entity
             .Property(x => x.Id)
             .IsRequired()
@@ -88,7 +88,7 @@ public static class ModelBuilderExtensions
     {
         entity.ToTable("Users", SystemConstants.IdentitySchema)
             .HasKey(x => x.Id);
-        
+
         entity
             .Property(x => x.Id)
             .IsRequired()
@@ -122,24 +122,24 @@ public static class ModelBuilderExtensions
             .IsUnicode(false)
             .HasColumnType("varchar(20)")
             .HasMaxLength(20);
-        
+
         entity.Property(x => x.FirstName)
             .IsRequired()
             .HasColumnType("varchar(50)")
             .HasMaxLength(50)
-            ; 
+            ;
         entity.Property(x => x.LastName)
             .IsRequired()
             .HasColumnType("varchar(150)")
             .HasMaxLength(150)
             ;
     }
-    
+
     private static void ConfigureRoleClaim(EntityTypeBuilder<IdentityRoleClaim<string>> entity)
     {
         entity.ToTable("RoleClaims", SystemConstants.IdentitySchema)
             .HasKey(x => x.Id);
-        
+
         entity
             .Property(x => x.Id)
             .IsRequired()
