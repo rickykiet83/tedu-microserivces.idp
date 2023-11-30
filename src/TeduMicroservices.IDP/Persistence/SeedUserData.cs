@@ -9,7 +9,7 @@ namespace TeduMicroservices.IDP.Persistence;
 
 public class SeedUserData
 {
-    public static void EnsureSeedData(string connectionString)
+    public static async Task EnsureSeedDataAsync(string connectionString)
     {
         var services = new ServiceCollection();
         services.AddLogging();
@@ -27,23 +27,19 @@ public class SeedUserData
             .AddEntityFrameworkStores<TeduIdentityContext>()
             .AddDefaultTokenProviders();
 
-        using (var serviceProvider = services.BuildServiceProvider())
-        {
-            using (var scope = serviceProvider
-                       .GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                CreateUser(scope, "Alice", "Smith", "Alice Smith's Wollongong", 
-                    Guid.NewGuid().ToString(), "alice123",
-                    "Administrator", "alicesmith@example.com");
-            }
-        }
+        await using var serviceProvider = services.BuildServiceProvider();
+        using var scope = serviceProvider
+            .GetRequiredService<IServiceScopeFactory>().CreateScope();
+        await CreateUserUserAsync(scope, "Alice", "Smith", "Alice Smith's Wollongong",
+            Guid.NewGuid().ToString(), "alice123",
+            "Administrator", "alicesmith@example.com");
     }
 
-    private static void CreateUser(IServiceScope scope, string firstName, string lastName,
+    private static async Task CreateUserUserAsync(IServiceScope scope, string firstName, string lastName,
         string address, string id, string password, string role, string email)
     {
         var userManagement = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-        var user = userManagement.FindByNameAsync(email).Result;
+        var user = await userManagement.FindByNameAsync(email);
         if (user == null)
         {
             user = new User
@@ -56,10 +52,10 @@ public class SeedUserData
                 EmailConfirmed = true,
                 Id = id,
             };
-            var result = userManagement.CreateAsync(user, password).Result;
+            var result = await userManagement.CreateAsync(user, password);
             CheckResult(result);
 
-            var addToRoleResult = userManagement.AddToRoleAsync(user, role).Result;
+            var addToRoleResult = await userManagement.AddToRoleAsync(user, role);
             CheckResult(addToRoleResult);
 
             result = userManagement.AddClaimsAsync(user, new Claim[]

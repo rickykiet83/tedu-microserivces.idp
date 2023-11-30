@@ -11,12 +11,12 @@ namespace TeduMicroservices.IDP.Presentation.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly UserManager<User> _userManager;
-    
+
     public AccountController(UserManager<User> userManager)
     {
         _userManager = userManager;
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> UserInfo()
     {

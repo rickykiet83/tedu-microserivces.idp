@@ -18,10 +18,10 @@ public class Index : PageModel
     private readonly IIdentityServerInteractionService _interaction;
     private readonly IEventService _events;
     private readonly SignInManager<User> _signInManager;
-    [BindProperty] 
+    [BindProperty]
     public string LogoutId { get; set; }
 
-    public Index(IIdentityServerInteractionService interaction, IEventService events, 
+    public Index(IIdentityServerInteractionService interaction, IEventService events,
         SignInManager<User> signInManager)
     {
         _interaction = interaction;
@@ -49,7 +49,7 @@ public class Index : PageModel
                 showLogoutPrompt = false;
             }
         }
-            
+
         if (showLogoutPrompt == false)
         {
             // if the request for logout was properly authenticated from IdentityServer, then
@@ -68,7 +68,7 @@ public class Index : PageModel
             // this captures necessary info from the current logged in user
             // this can still return null if there is no context needed
             LogoutId ??= await _interaction.CreateLogoutContextAsync();
-                
+
             // delete local authentication cookie
             await _signInManager.SignOutAsync();
 

@@ -13,8 +13,8 @@ public class Permission : EntityBase<long>
         Command = command.ToUpper();
         RoleId = roleId;
     }
-    
-    public Permission(long id, string function, string command, string roleId) 
+
+    public Permission(long id, string function, string command, string roleId)
         : this(function, command, roleId)
     {
         Id = id;
@@ -30,8 +30,8 @@ public class Permission : EntityBase<long>
     [Column(TypeName = "varchar(50)")]
     public string RoleId { get; set; }
 
-    [ForeignKey("RoleId")] 
-    
+    [ForeignKey("RoleId")]
+
     public virtual IdentityRole Role { get; set; }
 
     [Key]

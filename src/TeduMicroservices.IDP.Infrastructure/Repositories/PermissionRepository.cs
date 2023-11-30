@@ -13,7 +13,7 @@ public class PermissionRepository : RepositoryBase<Permission, long>, IPermissio
 {
     private readonly UserManager<User> _userManager;
     private readonly IMapper _mapper;
-    
+
     public PermissionRepository(TeduIdentityContext dbContext, IUnitOfWork unitOfWork, UserManager<User> userManager, IMapper mapper) : base(dbContext, unitOfWork)
     {
         _userManager = userManager;

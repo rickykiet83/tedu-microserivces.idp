@@ -99,6 +99,7 @@ bld/
 [Ll]ogs/
 
 **/appsettings.Development.json
+**/appsettings.Staging.json
 **/appsettings.Production.json
 src/TeduMicroservices.IDP/Public/**
 .idea/.idea.OctoQual/.idea

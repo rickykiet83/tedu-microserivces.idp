@@ -6,20 +6,15 @@ Log.Information("Starting up");
 var builder = WebApplication.CreateBuilder(args);
 try
 {
-    builder.Host.AddAppConfigurations();
+    builder.AddAppConfigurations();
     builder.Host.ConfigureSerilog();
-    
     var app = builder
         .ConfigureServices()
-        .ConfigurePipeline();
+        .ConfigurePipeline()
+        ;
+    await app.MigrateDatabaseAsync(builder.Configuration);
+    await SeedUserData.EnsureSeedDataAsync(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
 
-    app.MigrateDatabase();
-
-    //if (app.Environment.IsDevelopment())
-    //{
-    SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
-    //}
-    
     app.Run();
 }
 
