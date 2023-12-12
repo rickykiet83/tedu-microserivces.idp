@@ -13,7 +13,7 @@ Identity Server for Tedu Microservices Course.
 - Create a ".env" file at the same location with docker-compose.yml file:
   COMPOSE_PROJECT_NAME=tedu_microservices_idp
 - run command: docker-compose -f docker-compose.yml up -d --remove-orphans --build
-- Run scripts in DatabaseScripts/Store Procures
+- Run script: idp_stores.sql in DatabaseScripts/Store Procedures
 
 ## Application URLs - PRODUCTION:
 
