@@ -12,17 +12,18 @@ using TeduMicroservices.IDP.Persistence;
 namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TeduIdentityContext))]
-    [Migration("20220923131625_Init_Identity")]
+    [Migration("20240509032621_Init_Identity")]
     partial class Init_Identity
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "7.0.18")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -48,15 +49,13 @@ namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d4973489-ab83-49da-93f7-66134e1b293d",
-                            ConcurrencyStamp = "a171d7ed-18a7-4eb9-9bb0-23622285bef0",
+                            Id = "b6105f01-18f5-433c-91e0-dbd80d27e7f4",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "6fd79e7a-b2af-4638-89df-ee76cb132bf9",
-                            ConcurrencyStamp = "a3d7f6df-5cc8-4c94-a9f3-047afe9ffd11",
+                            Id = "b4365573-ff95-4015-8dd0-adf0650354a2",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -88,7 +87,7 @@ namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -111,12 +110,14 @@ namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("LoginProvider")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProviderKey")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
@@ -143,9 +144,11 @@ namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("LoginProvider")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Value")
@@ -162,7 +165,7 @@ namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Command")
                         .HasMaxLength(50)

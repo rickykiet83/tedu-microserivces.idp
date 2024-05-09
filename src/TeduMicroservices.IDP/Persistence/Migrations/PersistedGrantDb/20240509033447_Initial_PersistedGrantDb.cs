@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace TeduMicroservices.IDP.Migrations.IdentityServer.PersistedGrantDb
+namespace TeduMicroservices.IDP.Persistence.Migrations.PersistedGrantDb
 {
-    public partial class InitialPersistedGrantMigration : Migration
+    /// <inheritdoc />
+    public partial class Initial_PersistedGrantDb : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -159,6 +161,7 @@ namespace TeduMicroservices.IDP.Migrations.IdentityServer.PersistedGrantDb
                 column: "SubjectId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

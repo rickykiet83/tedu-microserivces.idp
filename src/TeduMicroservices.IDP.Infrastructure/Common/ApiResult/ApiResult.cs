@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace TeduMicroservices.IDP.Infrastructure.Common.ApiResult;

@@ -3,10 +3,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
 {
+    /// <inheritdoc />
     public partial class Init_Identity : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
@@ -64,8 +68,8 @@ namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "varchar(50)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProviderKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LoginProvider = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -121,8 +125,8 @@ namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "varchar(50)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LoginProvider = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -157,13 +161,11 @@ namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
                 schema: "Identity",
                 table: "Roles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "6fd79e7a-b2af-4638-89df-ee76cb132bf9", "a3d7f6df-5cc8-4c94-a9f3-047afe9ffd11", "Customer", "CUSTOMER" });
-
-            migrationBuilder.InsertData(
-                schema: "Identity",
-                table: "Roles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "d4973489-ab83-49da-93f7-66134e1b293d", "a171d7ed-18a7-4eb9-9bb0-23622285bef0", "Administrator", "ADMINISTRATOR" });
+                values: new object[,]
+                {
+                    { "b4365573-ff95-4015-8dd0-adf0650354a2", null, "Customer", "CUSTOMER" },
+                    { "b6105f01-18f5-433c-91e0-dbd80d27e7f4", null, "Administrator", "ADMINISTRATOR" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Permissions_RoleId_Function_Command",
@@ -180,6 +182,7 @@ namespace TeduMicroservices.IDP.Infrastructure.Persistence.Migrations
                 column: "Email");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

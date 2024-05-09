@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace TeduMicroservices.IDP.Migrations.IdentityServer.ConfigurationDb
+namespace TeduMicroservices.IDP.Persistence.Migrations.ConfigurationDb
 {
-    public partial class InitialConfigurationMigration : Migration
+    /// <inheritdoc />
+    public partial class Initial_ConfigurationDb : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -76,6 +78,9 @@ namespace TeduMicroservices.IDP.Migrations.IdentityServer.ConfigurationDb
                     AllowPlainTextPkce = table.Column<bool>(type: "bit", nullable: false),
                     RequireRequestObject = table.Column<bool>(type: "bit", nullable: false),
                     AllowAccessTokensViaBrowser = table.Column<bool>(type: "bit", nullable: false),
+                    RequireDPoP = table.Column<bool>(type: "bit", nullable: false),
+                    DPoPValidationMode = table.Column<int>(type: "int", nullable: false),
+                    DPoPClockSkew = table.Column<TimeSpan>(type: "time", nullable: false),
                     FrontChannelLogoutUri = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
                     FrontChannelLogoutSessionRequired = table.Column<bool>(type: "bit", nullable: false),
                     BackChannelLogoutUri = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
@@ -97,6 +102,7 @@ namespace TeduMicroservices.IDP.Migrations.IdentityServer.ConfigurationDb
                     AlwaysSendClientClaims = table.Column<bool>(type: "bit", nullable: false),
                     ClientClaimsPrefix = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     PairWiseSubjectSalt = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    InitiateLoginUri = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
                     UserSsoLifetime = table.Column<int>(type: "int", nullable: true),
                     UserCodeType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     DeviceCodeLifetime = table.Column<int>(type: "int", nullable: false),
@@ -640,6 +646,7 @@ namespace TeduMicroservices.IDP.Migrations.IdentityServer.ConfigurationDb
                 unique: true);
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

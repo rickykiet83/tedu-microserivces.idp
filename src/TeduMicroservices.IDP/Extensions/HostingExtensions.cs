@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Configuration.AzureKeyVault;
+using Azure.Identity;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -29,12 +29,12 @@ internal static class HostingExtensions
         var keyVaultName = configuration["Azure:KeyVaultName"];
         if (string.IsNullOrEmpty(keyVaultName)) return;
 
-        var keyVaultUrl = new Uri($"https://{keyVaultName}.vault.azure.net/").ToString();
+        var keyVaultUrl = new Uri($"https://{keyVaultName}.vault.azure.net/");
         var clientId = configuration["Azure:ClientId"];
         var clientSecret = configuration["Azure:ClientSecret"];
 
-        builder.Configuration.AddAzureKeyVault(keyVaultUrl, clientId, clientSecret,
-            new DefaultKeyVaultSecretManager());
+        builder.Configuration.AddAzureKeyVault(keyVaultUrl, 
+            new DefaultAzureCredential());
 
         var host = configuration.GetValue<string>("ConnectionStrings:Host");
         var database = configuration.GetValue<string>("ConnectionStrings:Database");
