@@ -30,12 +30,12 @@ public class SeedUserData
         await using var serviceProvider = services.BuildServiceProvider();
         using var scope = serviceProvider
             .GetRequiredService<IServiceScopeFactory>().CreateScope();
-        await CreateUserUserAsync(scope, "Alice", "Smith", "Alice Smith's Wollongong",
+        await CreateUserAsync(scope, "Alice", "Smith", "Alice Smith's Wollongong",
             Guid.NewGuid().ToString(), "alice123",
             "Administrator", "alicesmith@example.com");
     }
 
-    private static async Task CreateUserUserAsync(IServiceScope scope, string firstName, string lastName,
+    private static async Task CreateUserAsync(IServiceScope scope, string firstName, string lastName,
         string address, string id, string password, string role, string email)
     {
         var userManagement = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
