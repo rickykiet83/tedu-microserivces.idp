@@ -9,11 +9,12 @@ try
     builder.AddAppConfigurations();
     builder.Host.ConfigureSerilog();
     var app = builder
-        .ConfigureServices()
-        .ConfigurePipeline()
+            .ConfigureServices()
+            .ConfigurePipeline()
         ;
     await app.MigrateDatabaseAsync(builder.Configuration);
-    await SeedUserData.EnsureSeedDataAsync(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
+    // Migration must be done before seeding data
+    await builder.Services.EnsureSeedDataAsync();
 
     app.Run();
 }

@@ -88,6 +88,7 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.AddAzureKeyVaultManagedIdentityClientId();
+        builder.Services.AddLogging();
         builder.Services.AddControllersWithViews();
         builder.Services.AddConfigurationSettings(builder.Configuration);
         builder.Services.AddAutoMapper(typeof(Program));

@@ -9,8 +9,8 @@ public class Permission : EntityBase<long>
 {
     public Permission(string function, string command, string roleId)
     {
-        Function = function.ToUpper();
-        Command = command.ToUpper();
+        Function = function;
+        Command = command;
         RoleId = roleId;
     }
 
