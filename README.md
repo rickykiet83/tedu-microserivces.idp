@@ -51,9 +51,9 @@ Identity Server for Tedu Microservices Course.
 
 - Docker build (root folder): docker build -t tedu_microservice_idp:latest -f src/TeduMicroservices.IDP/Dockerfile src/.
 - Update migration (root folder):
-  - dotnet ef database update -c PersistedGrantDbContext -s src/TeduMicroservices.IDP/TeduMicroservices.IDP.csproj --connection "${connection_string}"
-  - dotnet ef database update -c ConfigurationDbContext -s src/TeduMicroservices.IDP/TeduMicroservices.IDP.csproj --connection "${connection_string}"
-  - dotnet ef database update -c TeduIdentityContext -p src/TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj -s src/TeduMicroservices.IDP/TeduMicroservices.IDP.csproj --connection "${connection_string}"
+  - `dotnet ef database update -c PersistedGrantDbContext -s src/TeduMicroservices.IDP/TeduMicroservices.IDP.csproj --connection "${connection_string}"`
+  - `dotnet ef database update -c ConfigurationDbContext -s src/TeduMicroservices.IDP/TeduMicroservices.IDP.csproj --connection "${connection_string}"`
+  - `dotnet ef database update -c TeduIdentityContext -p src/TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj -s src/TeduMicroservices.IDP/TeduMicroservices.IDP.csproj --connection "${connection_string}"`
 
 ## https certificate with Docker Compose:
 
@@ -61,3 +61,11 @@ Identity Server for Tedu Microservices Course.
   - MacOS: dotnet dev-certs https -ep ${HOME}/.aspnet/https/tedu-idp.pfx -p password!
   - WindowsOS: dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\tedu-idp.pfx -p password!
 - Trust the file: dotnet dev-certs https --trust
+
+## Docker hub:
+- Ref from video: (https://tedu.com.vn/video/714-build-cicd-pipline-for-idp-service-1853.html)
+- docker login: docker login
+- Go to docker hub, create a new repository: tedu-microservice-idp
+- At root folder:
+  - `docker build -t {your_docker_account}/tedu-microservice-idp:latest -f src/TeduMicroservices.IDP/Dockerfile src/.`
+  - `docker push {your_docker_account}/tedu-microservice-idp:latest`
