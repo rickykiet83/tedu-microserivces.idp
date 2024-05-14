@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using TeduMicroservices.IDP.Common;
 using TeduMicroservices.IDP.Infrastructure.Common;
 using TeduMicroservices.IDP.Infrastructure.Entities;
-using TeduMicroservices.IDP.Infrastructure.Repositories;
 
 namespace TeduMicroservices.IDP.Persistence;
 
@@ -66,12 +65,11 @@ public static class SeedUserData
         var role = await roleManager.FindByNameAsync(SystemConstants.Roles.Administrator);
         if (role is not null)
         {
-            var repositoryManager = scope.ServiceProvider.GetRequiredService<IRepositoryManager>();
-            var adminPermissions = await repositoryManager.Permission.GetPermissionsByRole(role.Id);
+            await using var teduContext = scope.ServiceProvider
+                .GetRequiredService<TeduIdentityContext>();
+            var adminPermissions = await teduContext.Permissions.Where(x => x.RoleId.Equals(role.Id)).ToListAsync();
             if (!adminPermissions.Any())
             {
-                await using var teduContext = scope.ServiceProvider
-                    .GetRequiredService<TeduIdentityContext>();
                 var permissions = PermissionHelper.GetAllPermissions();
                 foreach (var permission in permissions)
                 {
