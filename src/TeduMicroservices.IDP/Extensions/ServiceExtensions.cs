@@ -78,6 +78,7 @@ public static class ServiceExtensions
                 .UseSqlServer(connectionString))
             .AddIdentity<User, IdentityRole>(opt =>
             {
+                opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequireDigit = false;
                 opt.Password.RequiredLength = 6;
                 opt.Password.RequireUppercase = false;
