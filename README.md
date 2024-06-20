@@ -3,6 +3,7 @@
 Identity Server for Tedu Microservices Course.
 
 - Tedu Microservice Course : [https://tedu.com.vn/khoa-hoc](https://tedu.com.vn/course-ref/49/C5D7O1.html)
+- Microfrontends Angular Mastery Course: [https://tedu.com.vn/khoa-hoc](https://tedu.com.vn/course-ref/56/C5D7O1.html)
 
 ## Application URLs - DEVELOPMENT:
 
@@ -29,6 +30,7 @@ Identity Server for Tedu Microservices Course.
 ## Recommended Courses:
 
 - Xây dựng hệ thống với kiến trúc Micro-service: [https://tedu.com.vn/khoa-hoc](https://tedu.com.vn/course-ref/49/C5D7O1.html)
+- Microfrontends Angular Mastery Course: [https://tedu.com.vn/khoa-hoc](https://tedu.com.vn/course-ref/56/C5D7O1.html)
 - Terraform Mastery trên Cloud Azure: Từ Cơ bản đến Nâng cao: [https://tedu.com.vn/khoa-hoc](https://tedu.com.vncourse-ref/52/C5D7O1.html)
 - Làm chủ Docker để chinh phục DevOps: [https://tedu.com.vn/khoa-hoc](https://tedu.com.vn/course-ref/42/C5D7O1.html)
 - Tedu Exam course (MongoDb, DDD, CQRS, Identity Server): [https://tedu.com.vn/khoa-hoc](https://tedu.com.vn/course-ref/43/C5D7O1.html)
