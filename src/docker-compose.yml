@@ -26,7 +26,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/tedu-idp.pfx
       - ASPNETCORE_URLS=http://+:80;https://+:443
       - ASPNETCORE_HTTPS_PORT=7001
-      - 'ConnectionStrings:IdentitySqlConnection=Server=tedu_identitydb;Database=TeduIdentity;User Id=sa;Password=Passw0rd!;Multipleactiveresultsets=true;TrustServerCertificate=true;Connection Timeout=30;'
+      - 'ConnectionStrings:IdentitySqlConnection=Server=tedu_identity_db;Database=TeduIdentity;User Id=sa;Password=Passw0rd!;Multipleactiveresultsets=true;TrustServerCertificate=true;Connection Timeout=30;'
       - 'IdentityServer:BaseUrl=http://localhost:6001'
       - 'IdentityServer:IssuerUri=http://tedu.identity.api'
     volumes:
