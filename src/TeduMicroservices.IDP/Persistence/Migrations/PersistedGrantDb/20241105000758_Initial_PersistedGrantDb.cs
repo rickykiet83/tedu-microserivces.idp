@@ -71,10 +71,25 @@ namespace TeduMicroservices.IDP.Persistence.Migrations.PersistedGrantDb
                 });
 
             migrationBuilder.CreateTable(
+                name: "PushedAuthorizationRequests",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReferenceValueHash = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    ExpiresAtUtc = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Parameters = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PushedAuthorizationRequests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ServerSideSessions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Key = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Scheme = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -135,6 +150,17 @@ namespace TeduMicroservices.IDP.Persistence.Migrations.PersistedGrantDb
                 columns: new[] { "SubjectId", "SessionId", "Type" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_PushedAuthorizationRequests_ExpiresAtUtc",
+                table: "PushedAuthorizationRequests",
+                column: "ExpiresAtUtc");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PushedAuthorizationRequests_ReferenceValueHash",
+                table: "PushedAuthorizationRequests",
+                column: "ReferenceValueHash",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ServerSideSessions_DisplayName",
                 table: "ServerSideSessions",
                 column: "DisplayName");
@@ -172,6 +198,9 @@ namespace TeduMicroservices.IDP.Persistence.Migrations.PersistedGrantDb
 
             migrationBuilder.DropTable(
                 name: "PersistedGrants");
+
+            migrationBuilder.DropTable(
+                name: "PushedAuthorizationRequests");
 
             migrationBuilder.DropTable(
                 name: "ServerSideSessions");

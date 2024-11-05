@@ -112,7 +112,9 @@ namespace TeduMicroservices.IDP.Persistence.Migrations.ConfigurationDb
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Updated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastAccessed = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    NonEditable = table.Column<bool>(type: "bit", nullable: false)
+                    NonEditable = table.Column<bool>(type: "bit", nullable: false),
+                    PushedAuthorizationLifetime = table.Column<int>(type: "int", nullable: true),
+                    RequirePushedAuthorization = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TeduMicroservices.IDP.Persistence.Migrations.ConfigurationDb
 {
     [DbContext(typeof(ConfigurationDbContext))]
-    [Migration("20240509033745_Initial_ConfigurationDb")]
+    [Migration("20241105000821_Initial_ConfigurationDb")]
     partial class Initial_ConfigurationDb
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace TeduMicroservices.IDP.Persistence.Migrations.ConfigurationDb
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.18")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -436,6 +436,9 @@ namespace TeduMicroservices.IDP.Persistence.Migrations.ConfigurationDb
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int?>("PushedAuthorizationLifetime")
+                        .HasColumnType("int");
+
                     b.Property<int>("RefreshTokenExpiration")
                         .HasColumnType("int");
 
@@ -452,6 +455,9 @@ namespace TeduMicroservices.IDP.Persistence.Migrations.ConfigurationDb
                         .HasColumnType("bit");
 
                     b.Property<bool>("RequirePkce")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("RequirePushedAuthorization")
                         .HasColumnType("bit");
 
                     b.Property<bool>("RequireRequestObject")

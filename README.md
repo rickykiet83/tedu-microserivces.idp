@@ -13,7 +13,7 @@ Identity Server for Tedu Microservices Course.
 
 - Create a ".env" file at the same location with docker-compose.yml file:
   COMPOSE_PROJECT_NAME=tedu_microservices_idp
-- run command: docker-compose -f docker-compose.yml up -d --remove-orphans --build
+- run command: `docker-compose -f docker-compose.yml up -p tedu_idp -d --remove-orphans --build`
 - Run script: idp_stores.sql in DatabaseScripts/Store Procedures
 
 ## Application URLs - PRODUCTION:
@@ -46,8 +46,8 @@ Identity Server for Tedu Microservices Course.
 - migration ConfigurationDbContext: `dotnet ef migrations add "Initial_ConfigurationDb" -c ConfigurationDbContext -s TeduMicroservices.IDP.csproj -o Persistence/Migrations/ConfigurationDb`
 - update db PersistedGrantDbContext: `dotnet ef database update -c PersistedGrantDbContext`
 - update db ConfigurationDbContext: `dotnet ef database update -c ConfigurationDbContext`
-- dotnet ef migrations add "Init_Identity" -c TeduIdentityContext -s TeduMicroservices.IDP.csproj -p ../TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj -o Persistence/Migrations
-- dotnet ef database update -c TeduIdentityContext -s TeduMicroservices.IDP.csproj -p ../TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj
+- Migration TeduIdentityContext: `dotnet ef migrations add "Init_Identity" -c TeduIdentityContext -s TeduMicroservices.IDP.csproj -p ../TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj -o Persistence/Migrations`
+- Update db TeduIdentityContext: `dotnet ef database update -c TeduIdentityContext -s TeduMicroservices.IDP.csproj -p ../TeduMicroservices.IDP.Infrastructure/TeduMicroservices.IDP.Infrastructure.csproj`
 
 ## Useful commands:
 
