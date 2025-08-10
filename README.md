@@ -20,8 +20,8 @@ Identity Server for Tedu Microservices Course.
 
 ## Packages References
 
-- https://github.com/serilog/serilog/wiki/Getting-Started
-- https://github.com/IdentityServer/IdentityServer4.Quickstart.UI
+- [https://github.com/serilog/serilog/wiki/Getting-Started](https://github.com/serilog/serilog/wiki/Getting-Started)
+- [https://duendesoftware.com/products/identityserver](https://duendesoftware.com/products/identityserver)
 
 ## Install Environment
 
